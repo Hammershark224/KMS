@@ -23,38 +23,46 @@
                 </a>
             </li>
 
-            <!-- sales report side nav -->
-            @if ($role == "student" or $role == "vendor" or $role == "pp_admin")
+            @if ($role == "k_admin")
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'show-report' ? 'active' : '' }}" href="{{ route('show-report') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'show-report' ? 'active' : '' }}" href="">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-chart-bar-32 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Sales Report</span>
+                    <span class="nav-link-text ms-1">sidenav</span>
                 </a>
             </li>
             @endif
 
-            <!-- manage KIOSK side nav -->
-            @if ($role == "student" or $role == "vendor" or $role == "admin")
+            @if ($role == "MUIP")
             <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'user-management') == true ? 'active' : '' }}" href="">
+                <a class="nav-link {{ Route::currentRouteName() == 'show-report' ? 'active' : '' }}" href="">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-basket text-dark text-sm opacity-10"></i>
+                        <i class="ni ni-chart-bar-32 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Manage KIOSK</span>
+                    <span class="nav-link-text ms-1">sidenav</span>
                 </a>
             </li>
             @endif
 
-            <!-- manage complaints side nav -->
-            @if ($role == "student" or $role == "vendor" or $role == "tech_team")
+            @if ($role == "parent")
             <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'tables') == true ? 'active' : '' }}" href="">
+                <a class="nav-link {{ Route::currentRouteName() == 'show-report' ? 'active' : '' }}" href="">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-chat-round text-dark text-sm opacity-10"></i>
+                        <i class="ni ni-chart-bar-32 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Manage Complaints</span>
+                    <span class="nav-link-text ms-1">sidenav</span>
+                </a>
+            </li>
+            @endif
+
+            @if ($role == "staff")
+            <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'show-report' ? 'active' : '' }}" href="">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-chart-bar-32 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">sidenav</span>
                 </a>
             </li>
             @endif

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('ic')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string("phone_num")->unique();
-            $table->enum("role", ["admin", "lecturer", "technical", "student"]);
+            $table->enum("role", ["k_admin", "parent","MUIP","staff"]);
             $table->rememberToken();
             $table->timestamps();
         });

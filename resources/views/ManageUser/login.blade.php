@@ -35,10 +35,10 @@
                                         <div class="flex flex-col mb-3">
                                         <select name="role" class="form-control" placeholder="Select your user group">
                                             <option selected disabled>Select your user group</option>
-                                            <option value="admin">Admin</option>
-                                            <option value="tech_team">Technical Team</option>
-                                            <option value="lecturer">Lecturer</option>
-                                            <option value="student">Student</option>
+                                            <option value="k_admin">KAFA Admin</option>
+                                            <option value="MUIP">MUIP Admin</option>
+                                            <option value="parent">Parent</option>
+                                            <option value="staff">Staff</option>
                                         </select>
                                         @error('role') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                         </div>
