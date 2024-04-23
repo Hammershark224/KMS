@@ -3,20 +3,20 @@
         <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
                 <div class="copyright text-center text-sm text-muted text-lg-start">
-                    ©
+                    Copyright © 
                     <script>
                         document.write(new Date().getFullYear())
-                    </script>,
-                    made with <i class="fa fa-heart"></i> by BigO Company 
+                    </script>
+                    by BigO Company 
                 </div>
             </div>
             <div class="col-lg-6">
                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                     <li class="nav-item">
-                        <a href="https://www.ump.edu.my/en" class="nav-link text-muted" target="_blank">UMP SA</a>
+                        <a href="https://www.ump.edu.my/en" class="nav-link text-muted" target="_blank">UMPSA</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://fk.ump.edu.my/index.php/en/" class="nav-link text-muted" target="_blank">UMP SA Faculty of Computing</a>
+                        <a href="https://fk.ump.edu.my/index.php/en/" class="nav-link text-muted" target="_blank">UMPSA Faculty of Computing</a>
                     </li>
                 </ul>
             </div>
