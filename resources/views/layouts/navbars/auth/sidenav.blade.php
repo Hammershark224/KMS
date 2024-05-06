@@ -8,7 +8,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="{{ route('home') }}" target="_blank">
-            <img src="{{ asset('img/FKKMS favicon.png') }}" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="{{ asset('img/logos/KAFA Logo.png') }}" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">KMS</span>
         </a>
     </div>
@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'show-report' ? 'active' : '' }}" href="">
+                    <a class="nav-link {{ Route::currentRouteName() == 'result-list' ? 'active' : '' }}" href="{{route('results-list')}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa fa-list-alt text-dark text-sm opacity-10"></i>
