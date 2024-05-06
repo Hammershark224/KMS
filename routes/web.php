@@ -26,6 +26,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\ActivityController;
 
 Route::get('/', function () {
 	return redirect('/dashboard');
@@ -50,6 +51,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+	//Activity Management
+	Route::get('/KAFAActivities', [ActivityController::class, 'index'])->name('Activities');
 
 	//Result Management
 	Route::get('/results-list', [ResultController::class, 'index'])->name('results-list');

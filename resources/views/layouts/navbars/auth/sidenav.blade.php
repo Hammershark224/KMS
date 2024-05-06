@@ -142,8 +142,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'show-report' ? 'active' : '' }}"
-                        href="">
+                    <a class="nav-link {{ Route::currentRouteName() == 'Activities' ? 'active' : '' }}"
+                        href="/KAFAActivities">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-chart-bar-32 text-dark text-sm opacity-10"></i>
@@ -152,7 +152,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'show-report' ? 'active' : '' }}"
+                    <a class="nav-link {{ Route::currentRouteName() == 'A' ? 'active' : '' }}"
                         href="">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

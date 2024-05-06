@@ -9469,6 +9469,16 @@ textarea.form-control-lg {
   background-color: #11cdef !important;
 }
 
+.view-bg {
+  background-color: #99CCFF!important;
+  color: #0080F0 !important;
+}
+
+.edit-bg{
+  background-color: #FFB366 !important;
+  color:#000000 !important;
+}
+
 .bg-warning {
   background-color: #fb6340 !important;
 }
