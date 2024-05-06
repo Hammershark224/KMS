@@ -47,5 +47,20 @@ class DatabaseSeeder extends Seeder
             'role' => 'MUIP',
             'password' => bcrypt('1234')
         ]);
+
+        DB::table('results')->insert([
+            'stu_ic' => '111122223333',
+            'exam_center' => 'KAFA',
+            'year' => '2021',
+            'grade_solat' => 'A',
+            'grade_pchi' => 'A',
+            'grade_quran' => 'C',
+            'grade_jawi' => 'A',
+            'grade_sirah' => 'B',
+            'grade_syariah' => 'A',
+            'grade_adab' => 'A',
+            'grade_lughah' => 'A',
+            'created_at' => '2021-05-06 11:25:24',
+        ]);
     }
 }
