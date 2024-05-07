@@ -4,28 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Result;
+use Illuminate\Support\Facades\Auth;
+use App\Models\ParentDetail;
 
 class ResultController extends Controller
 {
     public function index()
     {
-        return view('ManageStudentResult.resultsList');
+        if(Auth::user()->role == 'parent')
+        {
+            $results = ParentDetail::with('studentApplication.results')->get()->first();
+            //dd($results);
+
+        }else{
+            $results = Result::all();
+        }
+        return view('ManageStudentResult.resultsList', compact('results'));
     }
 
     public function show()
     {
 
-        return view('ManageStudentResult.viewResult');
+        return view('ManageStudentResult.resultForm');
     }
 
     public function slip()
     {
-        return view('ManageStudentResult.viewResultSlip');
+        return view('ManageStudentResult.resultSlip');
     }
 
     public function create()
     {
-        return view('ManageStudentResult.addResult');
+        return view('ManageStudentResult.addResultForm');
     }
 
     public function store(Request $request)
@@ -52,7 +62,7 @@ class ResultController extends Controller
     public function edit($stu_ic)
     {
         $result = Result::where('stu_ic', $stu_ic)->first();
-        return view('ManageStudentResult.editResult', compact('result'));
+        return view('ManageStudentResult.editResultForm', compact('result'));
     }
 
     public function update(Request $request, $id)

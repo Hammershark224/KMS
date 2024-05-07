@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id('result_id');
+            $table->foreignId('student_id')->references("student_ID")->on("student_applications");
             $table->string('stu_ic');
             $table->string('exam_center');
             $table->string('year');

@@ -10,6 +10,7 @@ class Result extends Model
     use HasFactory;
 
     protected $fillable = [
+        'student_id', 
         'stu_ic',
         'exam_center',
         'year',
@@ -22,4 +23,9 @@ class Result extends Model
         'grade_adab',
         'grade_lughah',
     ];
+
+    public function studentApplication()
+    {
+        return $this->belongsTo(StudentApplication::class, 'student_id');
+    }
 }

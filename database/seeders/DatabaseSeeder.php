@@ -52,7 +52,27 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('1234')
         ]);
 
+        DB::table('parent_details')->insert([
+            'parent_ID' => '1',
+            'user_ID' => '3',
+            'created_at' => '2021-05-06 11:25:24'
+        ]);
+
+        DB::table('student_applications')->insert([
+            'student_ID' => '1',
+            'parent_ID' => '1',
+            'full_name' => 'Ali',
+            'ic' => '111122223333',
+            'gender' => 'male',
+            'date_birth' => '2000-01-01',
+            'address' => 'No 1, Jalan 1, Taman 1',
+            'status' => 'applied',
+            'reason' => 'New student',
+            'created_at' => '2021-05-06 11:25:24',
+        ]);
+
         DB::table('results')->insert([
+            'student_id' => '1',
             'stu_ic' => '111122223333',
             'exam_center' => 'KAFA',
             'year' => '2021',

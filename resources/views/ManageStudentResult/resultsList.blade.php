@@ -19,7 +19,8 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             No</th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -37,45 +38,48 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">1</span>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex px-1 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">John Michael</h6>
-                                                    <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                                    @foreach ($results->studentApplication as $result)
+                                        <tr>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-xs font-weight-bold">1</span>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-1 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">
+                                                            {{ $result->full_name }}</h6>
+                                                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-secondary text-xs font-weight-bold">CCC123</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">Center Pekan</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">2024</span>
-                                        </td>
-                                        <td class="align-middle text-center ">
-                                            <a href="{{ route('view-result') }}"
-                                                class="m-1 text-white text-secondary btn btn-info btn-sm"
-                                                data-toggle="tooltip" data-original-title="View">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="{{ route('edit-result', ['stu_ic' => '111122223333']) }}"
-                                                class="m-1 text-white text-secondary btn btn-primary btn-sm"
-                                                data-toggle="tooltip" data-original-title="Edit">
-                                                <i class="fa fa-pen"></i>
-                                            </a>
-                                            <a href="{{ route('delete-result') }}"
-                                                class="m-1 text-white text-secondary btn btn-danger btn-sm"
-                                                data-toggle="tooltip" data-original-title="Delete">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="text-secondary text-xs font-weight-bold">CCC123</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-xs font-weight-bold">Center Pekan</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-xs font-weight-bold">2024</span>
+                                            </td>
+                                            <td class="align-middle text-center ">
+                                                <a href="{{ route('view-result') }}"
+                                                    class="m-1 text-white text-secondary btn btn-info btn-sm"
+                                                    data-toggle="tooltip" data-original-title="View">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                <a href="{{ route('edit-result', ['stu_ic' => '111122223333']) }}"
+                                                    class="m-1 text-white text-secondary btn btn-primary btn-sm"
+                                                    data-toggle="tooltip" data-original-title="Edit">
+                                                    <i class="fa fa-pen"></i>
+                                                </a>
+                                                <a href="{{ route('delete-result') }}"
+                                                    class="m-1 text-white text-secondary btn btn-danger btn-sm"
+                                                    data-toggle="tooltip" data-original-title="Delete">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -6,7 +6,6 @@
         <div>
             <p style="text-align: center;" class="font-weight-bolder text-white mb-0">KAFA MANAGEMENT SYSTEM</p>
         </div>
-        
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <ul class="navbar-nav  justify-content-end">
@@ -16,7 +15,7 @@
                             @csrf
                             <a href="" class="nav-link text-white font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none">{{ Auth::user()->username }}</span>
+                                <span class="d-sm-inline d-none">{{ Auth::user()->full_name }}</span>
                             </a>
                         </form>
                     </li>
