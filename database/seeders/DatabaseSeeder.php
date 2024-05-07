@@ -16,35 +16,39 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'username' => 'k_admin',
+            'full_name' => 'k_admin',
             'phone_num' => '0123456789',
             'ic' => '111122223333',
             'email' => 'admin@argon.com',
             'role' => 'k_admin',
+            'gender' => 'male',
             'password' => bcrypt('1234')
         ]);
         DB::table('users')->insert([
-            'username' => 'staff',
+            'full_name' => 'staff',
             'phone_num' => '0122233112',
             'ic' => '222233334444',
             'email' => 'staff@argon.com',
             'role' => 'staff',
+            'gender' => 'male',
             'password' => bcrypt('1234')
         ]);
         DB::table('users')->insert([
-            'username' => 'parent',
+            'full_name' => 'parent',
             'phone_num' => '0123456781',
             'email' => 'parent@argon.com',
             'ic' => '444455556666',
             'role' => 'parent',
+            'gender' => 'male',
             'password' => bcrypt('1234')
         ]);
         DB::table('users')->insert([
-            'username' => 'MUIP',
+            'full_name' => 'MUIP',
             'phone_num' => '0124563779',
             'ic' => '777788889999',
             'email' => 'muip@argon.com',
-            'role' => 'MUIP',
+            'role' => 'muip',
+            'gender' => 'male',
             'password' => bcrypt('1234')
         ]);
 
