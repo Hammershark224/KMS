@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Result;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ParentDetail;
+use App\Models\StudentApplication;
 
 class ResultController extends Controller
 {
@@ -13,13 +14,12 @@ class ResultController extends Controller
     {
         if(Auth::user()->role == 'parent')
         {
-            $results = ParentDetail::with('studentApplication.results')->get()->first();
-            //dd($results);
-
+            $datas = ParentDetail::with('studentApplication.results')->where('user_ID', Auth::user()->user_ID)->get()->first();
         }else{
-            $results = Result::all();
+            $datas = ParentDetail::with('studentApplication.results')->get();
         }
-        return view('ManageStudentResult.resultsList', compact('results'));
+        //dd($datas);
+        return view('ManageStudentResult.resultsList', compact('datas'));
     }
 
     public function show()

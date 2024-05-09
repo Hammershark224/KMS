@@ -50,8 +50,18 @@
                             :
                         </div>
                         <div class="col-md-7">
-                            <input type="text" class="form-control" id="exam_center" name="exam_center"
-                                value="{{ $result->exam_center ? $result->exam_center : ' ' }}">
+                            <select class="form-select" name="exam_center">
+                                <option disabled selected>Select Exam Center</option>
+                                <option value="Sekolah Rendah Islam Al-Amin Paya Besar"
+                                    {{ old('exam_center', $result->exam_center) == 'Sekolah Rendah Islam Al-Amin Paya Besar' ? 'selected' : '' }}>
+                                    Sekolah Rendah Islam Al-Amin Paya Besar</option>
+                                <option value="Sekolah Agama Rakyat R-Raudhah Islamiah Sungai Isap 1"
+                                    {{ old('exam_center', $result->exam_center) == 'Sekolah Agama Rakyat R-Raudhah Islamiah Sungai Isap 1' ? 'selected' : '' }}>
+                                    Sekolah Agama Rakyat R-Raudhah Islamiah Sungai Isap 1</option>
+                                <option value="SEKOLAH MENENGAH AGAMA BUKIT IBAM"
+                                    {{ old('exam_center', $result->exam_center) == 'Sekolah Menengah Agama Bukit IBAM' ? 'selected' : '' }}>
+                                    Sekolah Menengah Agama Bukit IBAM</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
@@ -73,7 +83,7 @@
         </div>
         <div style="text-align: right;">
             <button class="btn btn-info m-1">Submit</button>
-            <a href="{{route('results-list')}}" class="m-1 btn btn-dark">Back</a>
+            <a href="{{ route('results-list') }}" class="m-1 btn btn-dark">Back</a>
         </div>
     </div>
     @include('layouts.footers.auth.footer')

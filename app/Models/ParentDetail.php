@@ -16,6 +16,6 @@ class ParentDetail extends Model
 
     public function studentApplication()
     {
-        return $this->hasMany(StudentApplication::class, 'parent_ID');
+        return $this->hasMany(StudentApplication::class, 'parent_ID', 'parent_ID');
     }
 }

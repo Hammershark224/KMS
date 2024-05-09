@@ -11,7 +11,7 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0" style="display: flex; justify-content: space-between; align-items: center;">
                         <p class="font-weight-bold">Student Results List</p>
-                        <a class="btn btn-info" href="{{ route('add-result') }}">+ Add Results</a>
+                        <a class="btn btn-add" href="{{ route('add-result') }}">+ Add Results</a>
                     </div>
 
                     <div class="card-body px-0 pt-0 pb-2">
@@ -24,10 +24,10 @@
                                             No</th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            IC No / Name</th>
+                                            Name</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Index No</th>
+                                            IC No</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Exam Center</th>
@@ -38,48 +38,63 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($results->studentApplication as $result)
+                                    @if ($datas->studentApplication != null)
+                                        @php
+                                            $index = 1;
+                                        @endphp
+                                        @foreach ($datas->studentApplication as $data)
+                                            @foreach ($data->results as $result)
+                                                <tr>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-secondary text-xs font-weight-bold">{{ $index }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            class="text-secondary text-xs font-weight-bold">{{ $data->full_name ? $data->full_name : ' ' }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-center text-sm">
+                                                        <span
+                                                            class="text-secondary text-xs font-weight-bold">{{ $data->ic ? $data->ic : ' ' }}</span>
+                                                    </td>
+
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-secondary text-xs font-weight-bold">{{ $result->exam_center ? $result->exam_center : ' ' }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-secondary text-xs font-weight-bold">{{ $result->year ? $result->year : ' ' }}</span>
+                                                    </td>
+
+                                                    <td class="align-middle text-center ">
+                                                        <a href="{{ route('view-result') }}"
+                                                            class="m-1 text-white text-secondary btn btn-view btn-sm"
+                                                            data-toggle="tooltip" data-original-title="View">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        <a href="{{ route('edit-result', ['stu_ic' => '111122223333']) }}"
+                                                            class="m-1 text-white text-secondary btn btn-edit btn-sm"
+                                                            data-toggle="tooltip" data-original-title="Edit">
+                                                            <i class="fa fa-pen"></i>
+                                                        </a>
+                                                        <a href="{{ route('delete-result') }}"
+                                                            class="m-1 text-white text-secondary btn btn-delete btn-sm"
+                                                            data-toggle="tooltip" data-original-title="Delete">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            @php
+                                                $index++;
+                                            @endphp
+                                        @endforeach
+                                    @else
                                         <tr>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">1</span>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-1 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">
-                                                            {{ $result->full_name }}</h6>
-                                                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="text-secondary text-xs font-weight-bold">CCC123</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">Center Pekan</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">2024</span>
-                                            </td>
-                                            <td class="align-middle text-center ">
-                                                <a href="{{ route('view-result') }}"
-                                                    class="m-1 text-white text-secondary btn btn-info btn-sm"
-                                                    data-toggle="tooltip" data-original-title="View">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                <a href="{{ route('edit-result', ['stu_ic' => '111122223333']) }}"
-                                                    class="m-1 text-white text-secondary btn btn-primary btn-sm"
-                                                    data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="fa fa-pen"></i>
-                                                </a>
-                                                <a href="{{ route('delete-result') }}"
-                                                    class="m-1 text-white text-secondary btn btn-danger btn-sm"
-                                                    data-toggle="tooltip" data-original-title="Delete">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </td>
+                                            <td colspan="6" class="text-center">No data available in table</td>
                                         </tr>
-                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

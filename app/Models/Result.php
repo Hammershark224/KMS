@@ -26,6 +26,6 @@ class Result extends Model
 
     public function studentApplication()
     {
-        return $this->belongsTo(StudentApplication::class, 'student_id');
+        return $this->belongsTo(StudentApplication::class, 'student_ID', 'student_id');
     }
 }

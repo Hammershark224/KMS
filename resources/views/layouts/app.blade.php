@@ -49,7 +49,7 @@ switch ($userRole) {
         $bgColor = 'bg-info'; // Set the background color for student
         break;
     case 'parent':
-        $bgColor = 'bg-primary'; // Set the background color for outside vendor
+        $bgColor = 'bg-green'; // Set the background color for outside vendor
         break;
     case 'muip':
         $bgColor = 'bg-success'; // Set the background color for outside vendor
