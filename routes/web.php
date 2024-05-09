@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/view-result-slip', [ResultController::class, 'slip'])->name('view-result-slip');
 	Route::get('/add-result', [ResultController::class, 'create'])->name('add-result');
 	Route::post('/add-result', [ResultController::class, 'store'])->name('add-result.perform');
-	Route::get('/edit-result/{stu_ic}', [ResultController::class, 'edit'])->name('edit-result');
+	Route::get('/edit-result/{result_id}', [ResultController::class, 'edit'])->name('edit-result');
 	Route::post('/edit-result', [ResultController::class, 'update'])->name('edit-result.perform');
 	Route::get('/delete-result', [ResultController::class, 'destroy'])->name('delete-result');
 });

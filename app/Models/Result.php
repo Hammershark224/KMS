@@ -12,7 +12,7 @@ class Result extends Model
     protected $fillable = [
         'student_id', 
         'stu_ic',
-        'exam_center',
+        'exam_center_id',
         'year',
         'grade_solat',
         'grade_pchi',
@@ -27,5 +27,10 @@ class Result extends Model
     public function studentApplication()
     {
         return $this->belongsTo(StudentApplication::class, 'student_ID', 'student_id');
+    }
+
+    public function examCenter()
+    {
+        return $this->belongsTo(ResultReference::class, 'exam_center_id');
     }
 }

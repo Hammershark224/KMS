@@ -76,7 +76,7 @@ class DatabaseSeeder extends Seeder
             'student_ID' => '1',
             'parent_ID' => '1',
             'full_name' => 'Ali',
-            'ic' => '111122223333',
+            'ic' => '111111111111',
             'gender' => 'male',
             'date_birth' => '2000-01-01',
             'address' => 'No 1, Jalan 1, Taman 1',
@@ -87,32 +87,32 @@ class DatabaseSeeder extends Seeder
         DB::table('student_applications')->insert([
             'student_ID' => '2',
             'parent_ID' => '1',
-            'full_name' => 'Abu',
-            'ic' => '111122223334',
+            'full_name' => 'Abu Bin Ali',
+            'ic' => '222222222222',
             'gender' => 'male',
             'date_birth' => '2000-01-01',
             'address' => 'No 1, Jalan Besar, Taman 1',
             'status' => 'applied',
             'reason' => 'New student',
-            'created_at' => '2021-05-06 11:25:24',
+            'created_at' => '2021-05-07 11:25:24',
         ]);
         DB::table('student_applications')->insert([
             'student_ID' => '3',
             'parent_ID' => '2',
             'full_name' => 'Abdullah Bin Mat Sari',
-            'ic' => '111122223355',
+            'ic' => '333333333333',
             'gender' => 'male',
             'date_birth' => '2000-01-01',
             'address' => 'No 2, Jalan 1, Taman 3',
             'status' => 'accepted',
             'reason' => 'New student',
-            'created_at' => '2021-05-06 11:25:24',
+            'created_at' => '2021-05-08 11:25:24',
         ]);
 
         DB::table('results')->insert([
             'student_id' => '1',
-            'stu_ic' => '111122223333',
-            'exam_center' => 'Sekolah Menengah Agama Bukit IBAM',
+            'stu_ic' => '111111111111',
+            'exam_center_id' => '1',
             'year' => '2021',
             'grade_solat' => 'A',
             'grade_pchi' => 'A',
@@ -126,8 +126,8 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('results')->insert([
             'student_id' => '2',
-            'stu_ic' => '111122223333',
-            'exam_center' => 'Sekolah Rendah Islam Al-Amin Paya Besar',
+            'stu_ic' => '222222222222',
+            'exam_center_id' => '2',
             'year' => '2021',
             'grade_solat' => 'A',
             'grade_pchi' => 'A',
@@ -141,8 +141,8 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('results')->insert([
             'student_id' => '3',
-            'stu_ic' => '111122223355',
-            'exam_center' => 'Sekolah Agama Rakyat R-Raudhah Islamiah Sungai Isap 1',
+            'stu_ic' => '333333333333',
+            'exam_center_id' => '3',
             'year' => '2021',
             'grade_solat' => 'A',
             'grade_pchi' => 'B',
@@ -154,5 +154,105 @@ class DatabaseSeeder extends Seeder
             'grade_lughah' => 'A',
             'created_at' => '2021-05-06 11:25:24',
         ]);
+
+        $this->registerResultReference();
+    }
+
+    public function registerResultReference()
+    {
+        $datas = [
+            //course
+            [
+                'category' => 'course',
+                'code' => 'UPKK01',
+                'value' => 'Bidang Al Quran',
+            ],
+            [
+                'category' => 'course',
+                'code' => 'UPKK02',
+                'value' => 'Ulum Syariah',
+            ],
+            [
+                'category' => 'course',
+                'code' => 'UPKK03',
+                'value' => 'Sirah',
+            ],
+            [
+                'category' => 'course',
+                'code' => 'UPKK04',
+                'value' => 'Adab',
+            ],
+            [
+                'category' => 'course',
+                'code' => 'UPKK05',
+                'value' => 'Pelajaran Jawi dan Khat',
+            ],
+            [
+                'category' => 'course',
+                'code' => 'UPKK06',
+                'value' => 'Lughah Al-Quran',
+            ],
+            [
+                'category' => 'course',
+                'code' => 'UPKK07',
+                'value' => 'Penghayatan Cara Hidup Islam (PCHI)',
+            ],
+            [
+                'category' => 'course',
+                'code' => 'UPKK08',
+                'value' => 'Amali Solat',
+            ],
+            //Exam Center
+            [
+                'category' => 'exam_center',
+                'code' => '1',
+                'value' => 'INTEGRATED ISLAMIC SCHOOL',
+            ],
+            [
+                'category' => 'exam_center',
+                'code' => '2',
+                'value' => 'KAFA AKADEMI TAHFIZ ILHAM',
+            ],
+            [
+                'category' => 'exam_center',
+                'code' => '3',
+                'value' => 'KAFA AT-TAUFIQIAH',
+            ],
+            [
+                'category' => 'exam_center',
+                'code' => '4',
+                'value' => 'KAFA AL-HAFIZIN',
+            ],
+            [
+                'category' => 'exam_center',
+                'code' => '5',
+                'value' => 'KAFA NUR AIN',
+            ],
+            [
+                'category' => 'exam_center',
+                'code' => '6',
+                'value' => 'MADRASAH UMAMAH HALIMI',
+            ],
+            [
+                'category' => 'exam_center',
+                'code' => '7',
+                'value' => 'SEKOLAH RENDAH TAHFIZ NEGERI PAHANG',
+            ],
+            [
+                'category' => 'exam_center',
+                'code' => '8',
+                'value' => 'SEKOLAH MENENGAH AGAMA AL-IHSAN',
+            ],
+            [
+                'category' => 'exam_center',
+                'code' => '9',
+                'value' => 'SEKOLAH MENENGAH AGAMA BUKIT IBAM',
+            ],
+
+        ];
+
+        foreach ($datas as $data) {
+            DB::table('result_references')->insert($data);
+        }
     }
 }

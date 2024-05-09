@@ -22,8 +22,8 @@
                             :
                         </div>
                         <div class="col-md-7">
-                            <input type="text" class="form-control" id="stu_name" name="stu_name"
-                                value="{{ $result->year ? $result->year : ' ' }}">
+                            <input disabled type="text" class="form-control" id="stu_name" name="stu_name"
+                                value="{{ $student->full_name ? $student->full_name : ' ' }}">
                         </div>
                     </div>
                     <div class="row">
@@ -36,7 +36,7 @@
                             :
                         </div>
                         <div class="col-md-7">
-                            <input type="text" class="form-control" id="stu_ic" name="stu_ic"
+                            <input disabled type="text" class="form-control" id="stu_ic" name="stu_ic"
                                 value="{{ $result->stu_ic ? $result->stu_ic : ' ' }}">
                         </div>
                     </div>
@@ -50,18 +50,17 @@
                             :
                         </div>
                         <div class="col-md-7">
-                            <select class="form-select" name="exam_center">
+                            <select class="form-select" name="exam_center_id">
                                 <option disabled selected>Select Exam Center</option>
-                                <option value="Sekolah Rendah Islam Al-Amin Paya Besar"
-                                    {{ old('exam_center', $result->exam_center) == 'Sekolah Rendah Islam Al-Amin Paya Besar' ? 'selected' : '' }}>
-                                    Sekolah Rendah Islam Al-Amin Paya Besar</option>
-                                <option value="Sekolah Agama Rakyat R-Raudhah Islamiah Sungai Isap 1"
-                                    {{ old('exam_center', $result->exam_center) == 'Sekolah Agama Rakyat R-Raudhah Islamiah Sungai Isap 1' ? 'selected' : '' }}>
-                                    Sekolah Agama Rakyat R-Raudhah Islamiah Sungai Isap 1</option>
-                                <option value="SEKOLAH MENENGAH AGAMA BUKIT IBAM"
-                                    {{ old('exam_center', $result->exam_center) == 'Sekolah Menengah Agama Bukit IBAM' ? 'selected' : '' }}>
-                                    Sekolah Menengah Agama Bukit IBAM</option>
+                                @foreach ($examCenters as $examCenter)
+                                    <option value="{{ $examCenter->code }}"
+                                        {{ old('exam_center_id', $result->exam_center_id) == $examCenter->code ? 'selected' : ' ' }}>
+                                        {{ $examCenter->value }}</option>
+                                @endforeach
                             </select>
+                            @error('exam_center')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row">
@@ -78,11 +77,58 @@
                                 value="{{ $result->year ? $result->year : ' ' }}">
                         </div>
                     </div>
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>KOD</th>
+                                <th>MATA PELAJARAN</th>
+                                <th>GRED</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach ($courses as $course)
+                                <tr>
+                                    <td>{{ $course->code }}</td>
+                                    <td>{{ $course->value }}</td>
+                                    <td>
+                                        @php
+                                            $gradeName = '';
+                                        @endphp
+                                        @if ($course->code == 'UPPK01')
+                                            {{ $gradeName = 'grade_quran' }}
+                                        @elseif ($course->code == 'UPPK02')
+                                            {{ $gradeName = 'grade_syariah' }}
+                                        @elseif ($course->code == 'UPPK03')
+                                            {{ $gradeName = 'grade_sirah' }}
+                                        @elseif ($course->code == 'UPPK04')
+                                            {{ $gradeName = 'grade_adab' }}
+                                        @elseif ($course->code == 'UPPK05')
+                                            {{ $gradeName = 'grade_jawi' }}
+                                        @elseif ($course->code == 'UPPK06')
+                                            {{ $gradeName = 'grade_lughah' }}
+                                        @elseif ($course->code == 'UPPK07')
+                                            {{ $gradeName = 'grade_pchi' }}
+                                        @elseif ($course->code == 'UPPK08')
+                                            {{ $gradeName = 'grade_solat' }}
+                                        @endif
+                                        <select style="border-radius: 5px;" name="{{ $gradeName }}" id="gred">
+                                            <option disabled selected value="NULL">Grade</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </form>
             </div>
         </div>
         <div style="text-align: right;">
-            <button class="btn btn-info m-1">Submit</button>
+            <button class="btn btn-submit m-1">Submit</button>
             <a href="{{ route('results-list') }}" class="m-1 btn btn-dark">Back</a>
         </div>
     </div>

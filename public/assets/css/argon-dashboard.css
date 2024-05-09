@@ -3738,6 +3738,12 @@ fieldset:disabled .btn {
   border-color: #C84B31;
 }
 
+.btn-submit {
+  color: #fff;
+  background-color: #F6B17A;
+  border-color: #F6B17A;
+}
+
 .btn-check:focus+.btn-primary,
 .btn-primary:focus {
   color: #000;

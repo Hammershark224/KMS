@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('result_id');
             $table->foreignId('student_id')->references("student_ID")->on("student_applications");
             $table->string('stu_ic');
-            $table->string('exam_center');
+            $table->foreignId('exam_center_id');
             $table->string('year');
             $table->string('grade_solat');
             $table->string('grade_pchi');

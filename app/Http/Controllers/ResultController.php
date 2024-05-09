@@ -7,19 +7,20 @@ use App\Models\Result;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ParentDetail;
 use App\Models\StudentApplication;
+use App\Models\ResultReference;
 
 class ResultController extends Controller
 {
     public function index()
     {
-        if(Auth::user()->role == 'parent')
-        {
-            $datas = ParentDetail::with('studentApplication.results')->where('user_ID', Auth::user()->user_ID)->get()->first();
-        }else{
-            $datas = ParentDetail::with('studentApplication.results')->get();
+        if (Auth::user()->role == 'parent') {
+            $students = ParentDetail::with('studentApplication.results')->where('user_ID', Auth::user()->user_ID)->get()->first();
+            $datas = $students->studentApplication;
+        } else {
+            $datas = StudentApplication::with('results')->orderByDesc('created_at')->get();
         }
-        //dd($datas);
-        return view('ManageStudentResult.resultsList', compact('datas'));
+        $examCenters = ResultReference::where('category', 'exam_center')->get();
+        return view('ManageStudentResult.resultsList', compact('datas', 'examCenters'));
     }
 
     public function show()
@@ -59,10 +60,13 @@ class ResultController extends Controller
         return redirect()->route('results-list')->with('success', 'Result added successfully.');
     }
 
-    public function edit($stu_ic)
+    public function edit($result_id)
     {
-        $result = Result::where('stu_ic', $stu_ic)->first();
-        return view('ManageStudentResult.editResultForm', compact('result'));
+        $result = Result::where('result_id', $result_id)->first();
+        $student = StudentApplication::where('student_ID', $result->student_id)->first();
+        $examCenters = ResultReference::where('category', 'exam_center')->get();
+        $courses = ResultReference::where('category', 'course')->get();
+        return view('ManageStudentResult.editResultForm', compact('result', 'student', 'examCenters', 'courses'));
     }
 
     public function update(Request $request, $id)
