@@ -56,8 +56,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/KAFAActivities', [ActivityController::class, 'index'])->name('Activities');
 	Route::get('/CreateActivity', [ActivityController::class, 'create'])->name('create-activity');
 	Route::post('/CreateActivity', [ActivityController::class, 'store'])->name('create-activity.perform');
-	Route::get('/ViewActivity', [ActivityController::class, 'show'])->name('view-activity');
-	Route::get('/EditActivity', [ActivityController::class, 'edit'])->name('edit-activity');
+	Route::get('/ViewActivity/{id}', [ActivityController::class, 'show'])->name('view-activity');
+	Route::get('/EditActivity/{id}', [ActivityController::class, 'edit'])->name('edit-activity');
+	Route::post('/EditActivity/{id}', [ActivityController::class, 'update'])->name('update-activity');
 	Route::get('/activities/{id}', [ActivityController::class, 'destroy'])->name('delete-activity');
 
 

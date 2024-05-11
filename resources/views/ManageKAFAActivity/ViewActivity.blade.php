@@ -19,24 +19,24 @@ $role = Auth::user()->role;
         <div class="form-group">
           <label for="activityName">Activity Name</label>
           <input type="text" class="form-control" id="activityName" aria-describedby="activityName"
-            value="Welcome Activity" disabled>
+            value="{{ $activity->activityName }}" disabled>
         </div>
         <div class="form-group">
           <label for="activityDescription">Activity Description</label>
           <textarea class="form-control" id="activityDescription" rows="3"
-            disabled>This is a welcome activity</textarea>
+            disabled>{{ $activity->activityDetails }}</textarea>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label for="activityDate">Activity Date</label>
-              <input type="date" class="form-control" id="activityDate" value="2024-05-06" disabled>
+              <input type="date" class="form-control" id="activityDate" value="{{ $activity->activityDate }}" disabled>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="activityLocation">Activity Location</label>
-              <input type="text" class="form-control" id="activityLocation" value="Pandang Sekolah" disabled>
+              <input type="text" class="form-control" id="activityLocation" value="{{ $activity->activityLocation }}" disabled>
             </div>
           </div>
         </div>
@@ -44,13 +44,13 @@ $role = Auth::user()->role;
           <div class="col-md-6">
             <div class="form-group">
               <label for="startTime">Start Time</label>
-              <input type="time" class="form-control" id="startTime" value="12:00" disabled>
+              <input type="time" class="form-control" id="startTime" value="{{ $activity->startTime }}" disabled>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="EndTime">End Time</label>
-              <input type="time" class="form-control" id="endTime" value="14:00" disabled>
+              <input type="time" class="form-control" id="endTime" value="{{ $activity->endTime }}" disabled>
             </div>
           </div>
         </div>
@@ -58,13 +58,13 @@ $role = Auth::user()->role;
           <div class="col-md-6">
             <div class="form-group">
               <label for="activityCapacity">Activity Capacity</label>
-              <input type="number" class="form-control" id="activityCapacity" value="10" disabled>
+              <input type="number" class="form-control" id="activityCapacity" value="{{ $activity->activityCapacity }}" disabled>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="availableSlots">Available Slots</label>
-              <input type="number" class="form-control" id="availableSlots" value="2" disabled>
+              <input type="number" class="form-control" id="availableSlots" value="{{ $activity->availableSlot }}" disabled>
             </div>
           </div>
         </div>

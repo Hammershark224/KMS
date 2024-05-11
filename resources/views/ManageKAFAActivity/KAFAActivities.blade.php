@@ -71,10 +71,10 @@ $rowNum = 1;
                                             </td>
                                             <td class="align-middle">
                                                 @if ($role == "k_admin" || $role == "staff")
-                                                <a href="{{ route('view-activity') }}" class="p-1 text-white text-secondary button view-bg justify-content-center ps-2 me-2 border border-dark" data-toggle="tooltip" data-original-title="View">
+                                                <a href="{{ route('view-activity',['id' => $data->activityID]) }}" class="p-1 text-white text-secondary button view-bg justify-content-center ps-2 me-2 border border-dark" data-toggle="tooltip" data-original-title="View">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('edit-activity') }}" class="p-1 text-white text-secondary button edit-bg ps-2 pe-1 me-2 border border-dark" data-toggle="tooltip" data-original-title="Edit">
+                                                <a href="{{ route('edit-activity',['id' => $data->activityID]) }}" class="p-1 text-white text-secondary button edit-bg ps-2 pe-1 me-2 border border-dark" data-toggle="tooltip" data-original-title="Edit">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
                                                 <a href="{{route('delete-activity',['id' => $data->activityID])}}" class="p-1 text-white text-secondary button bg-danger ps-2 pe-2 border border-dark" data-toggle="tooltip" data-original-title="Delete" 
@@ -83,7 +83,7 @@ $rowNum = 1;
                                                 </a>
                                                 @endif
                                                 @if ($role == "parent")
-                                                <a href="{{ route('edit-activity') }}" class="p-1 text-white text-secondary button view-bg justify-content-center ps-2 me-2 border border-dark" data-toggle="tooltip" data-original-title="View">
+                                                <a href="{{ route('view-activity',['id' => $data->activityID]) }}" class="p-1 text-white text-secondary button view-bg justify-content-center ps-2 me-2 border border-dark" data-toggle="tooltip" data-original-title="View">
                                                     <i class="fa fa-eye"></i> <span class="text-black me-2">View</span>
                                                 </a>
                                                 @endif

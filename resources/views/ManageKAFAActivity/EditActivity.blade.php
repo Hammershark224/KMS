@@ -15,27 +15,28 @@ $role = Auth::user()->role;
       <p class="font-weight-bold">Edit Activity</p>
     </div>
     <div class="card-body">
-      <form>
+      <form action="{{ route('update-activity', $activity->activityID) }}" method="post">
+        @csrf
         <div class="form-group">
           <label for="activityName">Activity Name</label>
-          <input type="text" class="form-control" id="activityName" aria-describedby="activityName"
-            value="Welcome Activity">
+          <input type="text" class="form-control" id="activityName" aria-describedby="activityName" name="activityName"
+            value="{{ $activity->activityName }}">
         </div>
         <div class="form-group">
           <label for="activityDescription">Activity Description</label>
-          <textarea class="form-control" id="activityDescription" rows="3">This is a welcome activity</textarea>
+          <textarea class="form-control" id="activityDescription" rows="3" name="activityDetails">{{ $activity->activityDetails }}</textarea>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label for="activityDate">Activity Date</label>
-              <input type="date" class="form-control" id="activityDate" value="2024-05-06">
+              <input type="date" class="form-control" id="activityDate" value="{{ $activity->activityDate }}" name="activityDate">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="activityLocation">Activity Location</label>
-              <input type="text" class="form-control" id="activityLocation" value="Pandang Sekolah">
+              <input type="text" class="form-control" id="activityLocation" value="{{ $activity->activityLocation }}" name="activityLocation">
             </div>
           </div>
         </div>
@@ -43,19 +44,19 @@ $role = Auth::user()->role;
           <div class="col-md-6">
             <div class="form-group">
               <label for="startTime">Start Time</label>
-              <input type="time" class="form-control" id="startTime" value="12:00">
+              <input type="time" class="form-control" id="startTime" value="{{ $activity->startTime }}" name="startTime">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="endTime">End Time</label>
-              <input type="time" class="form-control" id="endTime" value="14:00">
+              <input type="time" class="form-control" id="endTime" value="{{ $activity->endTime }}" name="endTime">
             </div>
           </div>
         </div>
         <div class="form-group">
           <label for="activityCapacity">Activity Capacity</label>
-          <input type="number" class="form-control" id="activityCapacity" value="10">
+          <input type="number" class="form-control" id="activityCapacity" value="{{ $activity->activityCapacity }}" name="activityCapacity">
         </div>
         <div class="text-center">
           <button class="btn btn-submit m-1">Submit</button>
