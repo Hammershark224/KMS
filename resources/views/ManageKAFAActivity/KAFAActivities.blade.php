@@ -27,9 +27,9 @@ $rowNum = 1;
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 No</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Activity Name</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Activity Details</th>
@@ -37,7 +37,7 @@ $rowNum = 1;
                                                 Location, Date, Time</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Capacity</th>
-                                            <th class="text-secondary text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            <th class="text-center text-secondary text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Operation</th>
                                         </tr>
                                     </thead>
@@ -83,9 +83,11 @@ $rowNum = 1;
                                                 </a>
                                                 @endif
                                                 @if ($role == "parent")
+                                                <div class="text-center">
                                                 <a href="{{ route('view-activity',['id' => $data->activityID]) }}" class="p-1 text-white text-secondary button view-bg justify-content-center ps-2 me-2 border border-dark" data-toggle="tooltip" data-original-title="View">
                                                     <i class="fa fa-eye"></i> <span class="text-black me-2">View</span>
                                                 </a>
+                                                </div>
                                                 @endif
                                             </td>
                                         </tr>

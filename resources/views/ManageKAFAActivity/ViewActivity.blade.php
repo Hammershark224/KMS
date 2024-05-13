@@ -70,10 +70,10 @@ $role = Auth::user()->role;
         </div>
         <div class="text-center">
           @if ($role == "k_admin" || $role == "staff")
-          <button class="btn btn-primary m-1">View Participants</button>
+          <a href="{{ route('participants-list',['id' => $activity->activityID]) }}" class="btn btn-primary m-1" >View Participants</a>
           @endif
           @if ($role == "parent")
-          <button class="btn btn-submit m-1">Join</button>
+          <a href="{{ route('join-activity',['id' => $activity->activityID]) }}" class="btn btn-submit m-1">Join</a>
           @endif
           <a href="{{ route('Activities') }}" class="m-1 btn btn-dark">Back</a>
         </div>

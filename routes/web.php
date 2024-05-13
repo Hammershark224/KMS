@@ -60,7 +60,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/EditActivity/{id}', [ActivityController::class, 'edit'])->name('edit-activity');
 	Route::post('/EditActivity/{id}', [ActivityController::class, 'update'])->name('update-activity');
 	Route::get('/activities/{id}', [ActivityController::class, 'destroy'])->name('delete-activity');
-
+	Route::get('/AddParticipants/{id}', [ActivityController::class, 'join'])->name('join-activity');
+	Route::post('/AddParticipants/{id}', [ActivityController::class, 'addParticipants'])->name('add-participants');
+	Route::get('/JoinedActivities', [ActivityController::class, 'JoinedActivities'])->name('joined-activities');
+	Route::get('/ListOfParticipants/{id}', [ActivityController::class, 'participantsList'])->name('participants-list');
 
 	//Result Management
 	Route::get('/results-list', [ResultController::class, 'index'])->name('results-list');
