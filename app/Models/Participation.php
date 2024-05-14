@@ -24,5 +24,9 @@ class Participation extends Model
     {
         return $this->belongsTo(StudentApplication::class, 'student_ID', 'student_id');
     }
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
+    }
 }
 

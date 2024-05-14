@@ -96,14 +96,44 @@ public function addParticipants(Request $request)
     // Optionally, you can redirect back or return a response
     return redirect()->route('Activities')->with('success', 'Added Participants successfully.');
 }
-public function JoinedActivities(){
-    $students = ParentDetail::with('studentApplication.participations')->where('user_ID', Auth::user()->user_ID)->get()->first();
-    $datas = $students->studentApplication;
-    return view('ManageKAFAActivity.JoinedActivities', compact('datas'));
+public function JoinedActivities()
+{
+    $datas = ParentDetail::with('studentApplication.participations.activity')
+        ->where('user_ID', Auth::user()->user_ID)
+        ->first()
+        ->studentApplication;
+
+    $activityIDs = $datas->flatMap->participations->pluck('activityID')->unique();
+    $activities = Activity::whereIn('activityID', $activityIDs)->get();
+
+
+    $groupedActivities = $activities->groupBy('activityID')->map(function ($activities) use ($datas) {
+        $children = [];
+        foreach ($activities as $activity) {
+            $participations = $datas->flatMap->participations->where('activityID', $activity->activityID);
+            foreach ($participations as $participation) {
+             
+                $studentId = $participation->student_id;
+                $child = StudentApplication::find($studentId)->full_name;
+                
+                $children[] = $child;
+            }
+        }
+        return ['activity' => $activities->first(), 'children' => $children];
+    });
+
+    return view('ManageKAFAActivity.JoinedActivities', compact('groupedActivities'));
 }
 public function participantsList($id){
     $activity = Activity::find($id);
     $participants = Participation::with('students.participants')->where('activityID', $id)->get();
-    return view('ManageKAFAActivity.ListofParticipants', compact('activity', 'participants'));
+    $students = [];
+    foreach ($participants as $participant) {
+        $studentId = $participant->student_id;
+        $student = StudentApplication::find($studentId);
+        $students[] = $student;
+    }
+
+    return view('ManageKAFAActivity.ListofParticipants', compact('activity', 'participants', 'students'));
 }
 }

@@ -5,7 +5,6 @@
 
 @php
 $role = Auth::user()->role;
-$index = 1;
 @endphp
 
 <div class="container-fluid">
@@ -38,31 +37,11 @@ $index = 1;
                     </tr>
                   </thead>
                   <tbody>
-                    @if ($datas != null)
-                    @php
-                    $index = 1;
-                    $activityChildren = [];
-                    // Fetch all unique activity IDs
-                    $activityIDs = $datas->flatMap->participations->pluck('activityID')->unique()->toArray();
-                    // Fetch all activities associated with these IDs
-                    $activities = \App\Models\Activity::whereIn('activityID', $activityIDs)->get();
-                    // Group activities and their associated children
-                    $groupedActivities = $activities->mapWithKeys(function ($activity) use ($datas) {
-                    $children = [];
-                    foreach ($datas as $data) {
-                    foreach ($data->participations as $participation) {
-                    if ($participation->activityID == $activity->activityID) {
-                    $child = \App\Models\StudentApplication::find($participation->student_id)->full_name;
-                    $children[] = $child;
-                    }
-                    }
-                    }
-                    return [$activity->activityID => ['activity' => $activity, 'children' => $children]];
-                    });
-                    @endphp
+                    @if ($groupedActivities != null)
                     @foreach ($groupedActivities as $activityID => $activityData)
                     <tr>
-                      <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $index++ }}</td>
+                      <td class="align-middle text-center text-secondary text-xs font-weight-bold">
+                        {{ $loop->iteration }}</td>
                       <td class="align-middle text-center text-secondary text-xs font-weight-bold">
                         {{ $activityData['activity']->activityName }}</td>
                       <td class="align-middle text-center text-secondary text-xs font-weight-bold">

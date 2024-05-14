@@ -17,42 +17,26 @@ $role = Auth::user()->role;
     <div class="card-body">
       <strong><span class="activityName fs-6 text">Activity Name: </span>
         <span class="fs-6 text">{{ $activity->activityName }}</span></strong>
-      @php
-      $index = 1;
-      @endphp
       <form>
-        @if ($participants != null)
-        @foreach ($participants as $participant)
+        @if ($students != null)
         @php
-        // Access the student ID from the participation
-        $studentId = $participant->student_id;
-        
-        // Use the student ID to fetch the corresponding student details
-        $student = \App\Models\StudentApplication::find($studentId);
-        // Check if the student exists
-        if ($student) {
-            // Access student properties
-            $studentName = $student->full_name;
-            $studentIc = $student->ic;
-        } else {
-            // Handle case where student is not found
-            $studentName = "Unknown";
-            $studentIc = "Unknown";
-        }
+        $index = 1;
         @endphp
+        @foreach ($students as $student)
         <input type="hidden" name="activityID" value="{{ $activity->activityID }}">
         <div class="form-check mt-3">
-          <label for="defaultCheck{{$index++}}">
-            {{ $studentName }} [{{ $studentIc }}]
-          </label>
+          <span for="check{{$index++}}">
+         {{$loop->iteration}}. {{ $student->full_name }} [{{ $student->ic }}]
+          </span>
         </div>
         @endforeach
+  
         @else
         <p class="text-center">No data available in table</p>
         @endif
         <div class="text-center">
-            <a href="{{route('Activities')}}" class="btn btn-back btn-dark m-1">Back</a>
-          </div>
+          <a href="{{route('Activities')}}" class="btn btn-back btn-dark m-1">Back</a>
+        </div>
       </form>
     </div>
   </div>
