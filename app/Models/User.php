@@ -67,6 +67,11 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
+    public function parent()
+    {
+        return $this->hasOne(ParentDetail::class, 'user_ID');
+    }
+
     public function parentDetail()
     {
         return $this->hasOne(ParentDetail::class, 'user_ID');

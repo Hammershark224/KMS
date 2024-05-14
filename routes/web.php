@@ -25,6 +25,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\StudentApplicationController;
+use App\Http\Controllers\StaffDetailController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ActivityController;
 
@@ -51,6 +53,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+	//Manage Student Registration
+	Route::get('/student-list', [StudentApplicationController::class, 'indexAdmin'])->name('student.manage');
+	Route::get('/children-list', [StudentApplicationController::class, 'index'])->name('children.manage');
+	Route::get('/add-child', [StudentApplicationController::class, 'create'])->name('children.add');
+	Route::post('/store-child', [StudentApplicationController::class, 'store'])->name('children.store');
+	Route::get('/view-student/{id}', [StudentApplicationController::class, 'show'])->name('student.view');
 
 	//Activity Management
 	Route::get('/KAFAActivities', [ActivityController::class, 'index'])->name('Activities');

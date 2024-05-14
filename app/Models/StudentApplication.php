@@ -9,6 +9,16 @@ class StudentApplication extends Model
 {
     use HasFactory;
     protected $primaryKey = 'student_ID';
+    protected $fillable = [
+        'parent_ID', 
+        'full_name', 
+        'ic', 
+        'gender', 
+        'date_birth', 
+        'address', 
+        'status', 
+        'reason'];
+
     public function parentDetail()
     {
         return $this->belongsTo(ParentDetail::class, 'parent_ID');
