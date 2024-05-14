@@ -2,7 +2,7 @@
 
 @section('content')
 @include('layouts.navbars.auth.subnav', [
-'title' => 'Activity List',
+'title' => 'Activity',
 'subtitle' => 'View Activity',
 ])
 
@@ -85,3 +85,15 @@ $role = Auth::user()->role;
 </div>
 @include('layouts.footers.auth.footer')
 @endsection
+@push('scripts')
+<script>
+  window.onload = function() {
+    @if(session('success'))
+    alert("{{ session('success') }}");
+    @endif
+
+    @if(session('error'))
+    alert("{{ session('error') }}");
+    @endif
+  }
+  </script>

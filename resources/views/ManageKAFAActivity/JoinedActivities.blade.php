@@ -47,8 +47,8 @@ $role = Auth::user()->role;
                       <td class="align-middle text-center text-secondary text-xs font-weight-bold">
                         {{ $activityData['activity']->activityDetails }}</td>
                       <td class="align-middle text-center text-secondary text-xs font-weight-bold">
-                        {{  $activityData['activity']->activityLocation }},
-                        {{  $activityData['activity']->activityDate }}, {{  $activityData['activity']->startTime }} -
+                        {{  $activityData['activity']->activityLocation }} <br>
+                        {{  $activityData['activity']->activityDate }} <br> {{  $activityData['activity']->startTime }} -
                         {{  $activityData['activity']->endTime }}</td>
                       <td class="align-middle text-center text-secondary text-xs font-weight-bold">
                         @foreach ($activityData['children'] as $child)
@@ -57,7 +57,7 @@ $role = Auth::user()->role;
                       </td>
                       <td class="align-middle text-center">
                         <div class="text-center">
-                          <a href="#"
+                        <a href="{{ route('joined-activity', $activityData['activity']->activityID) }}"
                             class="p-1 text-white text-secondary button view-bg justify-content-center ps-2 me-2 border border-dark"
                             data-toggle="tooltip" data-original-title="View">
                             <i class="fa fa-eye"></i> <span class="text-black me-2">View</span>
@@ -84,3 +84,16 @@ $role = Auth::user()->role;
   </div>
   @include('layouts.footers.auth.footer')
   @endsection
+  @push('scripts')
+  <script>
+  window.onload = function() {
+    @if(session('success'))
+    alert("{{ session('success') }}");
+    @endif
+
+    @if(session('error'))
+    alert("{{ session('error') }}");
+    @endif
+  }
+  </script>
+  

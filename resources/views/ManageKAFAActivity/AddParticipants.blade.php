@@ -2,7 +2,7 @@
 
 @section('content')
 @include('layouts.navbars.auth.subnav', [
-'title' => 'Activity List',
+'title' => 'Activity',
 'subtitle' => 'Add Participants',
 ])
 
@@ -30,7 +30,7 @@ $role = Auth::user()->role;
         <div class="form-check mt-3">
           <input class="form-check-input participant-checkbox" type="checkbox" name="participants[]"
             value="{{ $data->student_ID }}" id="defaultCheck{{$index++}}">
-          <label for="defaultCheck{{$index++}}">
+          <label class="mt-1" for="defaultCheck{{$index++}}">
             {{ $data->full_name ? $data->full_name : ' ' }} [{{ $data->ic ? $data->ic : ' ' }}]
           </label>
         </div>

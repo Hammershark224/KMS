@@ -63,8 +63,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/AddParticipants/{id}', [ActivityController::class, 'join'])->name('join-activity');
 	Route::post('/AddParticipants/{id}', [ActivityController::class, 'addParticipants'])->name('add-participants');
 	Route::get('/JoinedActivities', [ActivityController::class, 'JoinedActivities'])->name('joined-activities');
+	Route::get('/JoinedActivity/{id}', [ActivityController::class, 'viewJoinedActivity'])->name('joined-activity');
+	Route::get('/DeleteParticipants/{id}', [ActivityController::class, 'unjoin'])->name('unjoin-activity');
 	Route::get('/ListOfParticipants/{id}', [ActivityController::class, 'participantsList'])->name('participants-list');
-
+	Route::post('/DeleteParticipants/{id}', [ActivityController::class, 'DeleteParticipants'])->name('delete-participants');
 	//Result Management
 	Route::get('/results-list', [ResultController::class, 'index'])->name('results-list');
 	Route::get('/view-result', [ResultController::class, 'show'])->name('view-result');
