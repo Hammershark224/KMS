@@ -1,9 +1,14 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
+
+@php
+    $role = Auth::user()->role;
+@endphp
+
 @include('layouts.navbars.auth.subnav', [
-    'title' => 'Create',
-    'subtitle' => 'Create',
+    'title' => 'View',
+    'subtitle' => 'View',
 ])
 <div id="alert">
     @include('components.alert')
@@ -12,9 +17,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <form role="form" method="POST" action="{{ route('student.store') }}" enctype="multipart/form-data">
+                <form role="form" enctype="multipart/form-data">
                     @csrf
-                    @foreach ($students as $student)
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Application Form</p>
@@ -48,28 +52,54 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Student Name</label>
-                                    <input class="form-control" type="text" name="full_name" value="{{ $student->full_name }}">
+                                    <input class="form-control" type="text" name="full_name" value="{{ $student->full_name }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">IC No. </label>
-                                    <input class="form-control" type="text" name="ic">
+                                    <input class="form-control" type="text" name="ic" value="{{ $student->ic }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Gender</label>
-                                    <select class="form-control" required>
+                                    <select class="form-control" disabled>
                                         <option disabled selected value="">Gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="male" @if($student->gender=='male') selected @endif >Male</option>
+                                        <option value="female" @if($student->gender=='female') selected @endif >Female</option>
                                     </select>
                                 </div>
                             </div>
-                                        
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Date of Birth</label>
+                                    <input class="form-control" type="date" name="date_birth" value="{{ $student->date_birth }}" readonly>
+                                </div>
+                            </div>        
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Address</label>
+                                    <textarea class="form-control"  name="address" disabled>{{ $student->address }}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Status</label>
+                                    <input class="form-control" type="text" name="status" value="{{ $student->status }}" readonly>
+                                </div>
+                            </div>    
+                            <div class="d-flex justify-content-center">
+                                @if ($role == "k_admin")
+                                    <a href="{{ route('student.manage') }}" class="btn btn-secondary btn-sm mx-2">Back</a>
+                                @endif
+                                @if ($role == "parent")
+                                    <a href="{{ route('children.manage') }}" class="btn btn-secondary btn-sm mx-2">Back</a>
+                                @endif
+                            </div>
                         </div>
                     </div>
+                </form>
             </div>
         </div> 
     </div>

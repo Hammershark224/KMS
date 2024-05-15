@@ -14,7 +14,7 @@ class StudentApplicationController extends Controller
     }
 
     public function index() {
-        $parent = ParentDetail::where('parent_ID',auth()->user()->parent->parent_ID)->first();
+        $parent = ParentDetail::where('parent_ID', auth()->user()->parent->parent_ID)->first();
         $children = StudentApplication::where('parent_ID', $parent->parent_ID)->get();
         return view('ManageStudentRegistration.studentManage',compact('parent', 'children'));
     }
@@ -50,18 +50,31 @@ class StudentApplicationController extends Controller
             'parent_ID' => $parent->parent_ID, 
         ]);
 
-        return view('ManageStudentRegistration.studentManage');
+        return redirect(route('children.manage'));
     }
 
     public function show($id) {
-        $students = StudentApplication::find($id);
-        // dd($students);
-        return view('ManageStudentRegistration.viewForm', ['students'=>$students]);
+        $student = StudentApplication::find($id);
+        // dd($student);
+        return view('ManageStudentRegistration.viewForm', compact('student'));
     }
 
-    public function edit($id) {
+    // public function edit($id) {
+    //     $student = StudentApplication::find($id);
+    //     if($applications->status == 'accepted')
+    //     return view('ManageStudentRegistration.viewForm', ['parents'=>$parents]);
+    // }
+
+    public function destroy($id) {
         $student = StudentApplication::find($id);
-        if($applications->status == 'accepted')
-        return view('ManageStudentRegistration.viewForm', ['parents'=>$parents]);
+        $student -> delete();
+        $role = auth()->user()->role;
+
+        // Redirect based on the role
+        if ($role === 'admin') {
+            return redirect()->route('student.manage'); // Redirect to the admin view
+        } elseif ($role === 'parent') {
+            return redirect()->route('children.manage');
+        }
     }
 }

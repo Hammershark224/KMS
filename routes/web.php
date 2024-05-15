@@ -59,7 +59,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/children-list', [StudentApplicationController::class, 'index'])->name('children.manage');
 	Route::get('/add-child', [StudentApplicationController::class, 'create'])->name('children.add');
 	Route::post('/store-child', [StudentApplicationController::class, 'store'])->name('children.store');
-	Route::get('/view-student/{id}', [StudentApplicationController::class, 'show'])->name('student.view');
+	Route::get('/show-student/{id}', [StudentApplicationController::class, 'show'])->name('student.show');
+	Route::get('/edit-student/{id}', [StudentApplicationController::class, 'edit'])->name('student.edit');
+	Route::get('/update-student/{id}', [StudentApplicationController::class, 'update'])->name('student.update');
+	Route::get('/delete-student/{id}', [StudentApplicationController::class, 'destroy'])->name('student.delete');
 
 	//Activity Management
 	Route::get('/KAFAActivities', [ActivityController::class, 'index'])->name('Activities');

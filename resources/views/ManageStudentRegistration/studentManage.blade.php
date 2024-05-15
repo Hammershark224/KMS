@@ -3,7 +3,7 @@
 @section('content')
 
 @php
-$role = Auth::user()->role;
+    $role = Auth::user()->role;
 @endphp
 
     @if ($role == "k_admin")
@@ -70,9 +70,9 @@ $role = Auth::user()->role;
                                                 data-toggle="tooltip" data-original-title="Edit">
                                                 <i class="fa fa-pen"></i>
                                             </a>
-                                            <a href=""
+                                            <a href="{{ route('student.delete', $student->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-danger btn-sm"
-                                                data-toggle="tooltip" data-original-title="Delete">
+                                                data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Confirm to delete?')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>
@@ -87,10 +87,11 @@ $role = Auth::user()->role;
         </div>
     </div>
     @endif
+    
     @if ($role == "parent")
     @include('layouts.navbars.auth.subnav', [
-        'title' => 'Student List',
-        'subtitle' => 'Student List',
+        'title' => 'Children List',
+        'subtitle' => 'Children List',
     ])
     <div class="container-fluid py-4">
         <div class="row">
@@ -123,7 +124,7 @@ $role = Auth::user()->role;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($children as $children)
+                                    @foreach ($children as $child)
                                     <tr>
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">1</span>
@@ -131,30 +132,30 @@ $role = Auth::user()->role;
                                         <td>
                                             <div class="d-flex px-1 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $children->full_name }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $child->full_name }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $children->date_birth }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $child->date_birth }}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $children->status }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $child->status }}</span>
                                         </td>
                                         <td class="align-middle text-center ">
-                                            <a href=""
+                                            <a href="{{ route('student.show', $child->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-info btn-sm"
                                                 data-toggle="tooltip" data-original-title="View">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href=""
+                                            <a href="{{ route('student.edit', $child->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-primary btn-sm"
                                                 data-toggle="tooltip" data-original-title="Edit">
                                                 <i class="fa fa-pen"></i>
                                             </a>
-                                            <a href=""
+                                            <a href="{{ route('student.delete', $child->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-danger btn-sm"
-                                                data-toggle="tooltip" data-original-title="Delete">
+                                                data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Confirm to delete?')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>
