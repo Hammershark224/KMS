@@ -60,12 +60,12 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $student->status }}</span>
                                         </td>
                                         <td class="align-middle text-center ">
-                                            <a href=""
+                                            <a href="{{ route('student.show', $student->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-info btn-sm"
                                                 data-toggle="tooltip" data-original-title="View">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href=""
+                                            <a href="{{ route('student.edit', $student->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-primary btn-sm"
                                                 data-toggle="tooltip" data-original-title="Edit">
                                                 <i class="fa fa-pen"></i>
@@ -98,7 +98,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0" style="display: flex; justify-content: space-between; align-items: center;">
-                        <p class="font-weight-bold">Student Results List</p>
+                        <p class="font-weight-bold">Children List</p>
                         <a class="btn btn-add" href="{{ route('children.add') }}">Create New</a>
                     </div>
 
@@ -147,11 +147,6 @@
                                                 class="m-1 text-white text-secondary btn btn-info btn-sm"
                                                 data-toggle="tooltip" data-original-title="View">
                                                 <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="{{ route('student.edit', $child->student_ID) }}"
-                                                class="m-1 text-white text-secondary btn btn-primary btn-sm"
-                                                data-toggle="tooltip" data-original-title="Edit">
-                                                <i class="fa fa-pen"></i>
                                             </a>
                                             <a href="{{ route('student.delete', $child->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-danger btn-sm"

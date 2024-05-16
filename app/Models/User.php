@@ -18,11 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
+        'full_name',
         // 'firstname',
         // 'lastname',
         'email',
         'password',
+        'gender',
         // 'address',
         // 'city',
         // 'country',
@@ -70,6 +71,11 @@ class User extends Authenticatable
     public function parent()
     {
         return $this->hasOne(ParentDetail::class, 'user_ID');
+    }
+
+    public function staff()
+    {
+        return $this->hasOne(StaffDetail::class, 'user_ID');
     }
 
     public function parentDetail()

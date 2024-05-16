@@ -1,14 +1,9 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-
-@php
-    $role = Auth::user()->role;
-@endphp
-
 @include('layouts.navbars.auth.subnav', [
-    'title' => 'View',
-    'subtitle' => 'View',
+    'title' => 'Create',
+    'subtitle' => 'Create',
 ])
 <div id="alert">
     @include('components.alert')
@@ -17,7 +12,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <form role="form" method="POST" action="{{ route('student.update', $student->student_ID) }}" enctype="multipart/form-data">
+                <form role="form" method="POST" action="{{ route('children.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center">
@@ -52,59 +47,46 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Student Name</label>
-                                    <input class="form-control" type="text" name="full_name" value="{{ $student->full_name }}" readonly>
+                                    <input class="form-control" type="text" name="full_name">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">IC No. </label>
-                                    <input class="form-control" type="text" name="ic" value="{{ $student->ic }}" readonly>
+                                    <input class="form-control" type="text" name="ic">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Gender</label>
-                                    <select class="form-control" disabled>
+                                    <select class="form-control"  name="gender" required>
                                         <option disabled selected value="">Gender</option>
-                                        <option value="male" @if($student->gender=='male') selected @endif >Male</option>
-                                        <option value="female" @if($student->gender=='female') selected @endif >Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Date of Birth</label>
-                                    <input class="form-control" type="date" name="date_birth" value="{{ $student->date_birth }}" readonly>
+                                    <input class="form-control" type="date" name="date_birth">
                                 </div>
                             </div>        
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Address</label>
-                                    <textarea class="form-control" name="address" disabled>{{ $student->address }}</textarea>
+                                    <textarea class="form-control"  name="address"></textarea>
                                 </div>
+                            </div>    
+                            <div class="form-group">
+                                <input type="hidden" name="status" value="applied">
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select id="status" name="status" class="form-control">
-                                        <option disabled selected value="">Select Status</option>
-                                        <option value="reviewed" @if($student->status=='reviewed') selected @endif>Reviewed</option>
-                                        <option value="accepted" @if($student->status=='accepted') selected @endif>Accepted</option>
-                                        <option value="rejected" @if($student->status=='rejected') selected @endif>Rejected</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12" id="reason-container" style="display: none;">
-                                <div class="form-group">
-                                    <label for="reason" class="form-control-label">Reason</label>
-                                    <textarea class="form-control" name="reason" id="reason"></textarea>
-                                </div>
-                            </div>   
-                            <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary btn-sm mx-2">Save</button>
-                                <a href="{{ route('student.manage') }}" class="btn btn-secondary btn-sm mx-2">Back</a>
-                            </div>
+                            
                         </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary btn-sm mx-2">Apply</button>
+                        <a href="{{ route('children.manage') }}" class="btn btn-secondary btn-sm mx-2">Back</a>
                     </div>
                 </form>
             </div>
@@ -112,24 +94,4 @@
     </div>
     @include('layouts.footers.auth.footer')
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var statusSelect = document.getElementById('status');
-    var reasonContainer = document.getElementById('reason-container');
-
-    function toggleReasonContainer() {
-        if (statusSelect.value === 'rejected') {
-            reasonContainer.style.display = 'block';
-        } else {
-            reasonContainer.style.display = 'none';
-        }
-    }
-
-    statusSelect.addEventListener('change', toggleReasonContainer);
-
-    toggleReasonContainer();
-});
-</script>
-
 @endsection

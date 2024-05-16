@@ -26,7 +26,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\StudentApplicationController;
-use App\Http\Controllers\StaffDetailController;
+use App\Http\Controllers\StaffProfileController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ActivityController;
 
@@ -61,8 +61,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/store-child', [StudentApplicationController::class, 'store'])->name('children.store');
 	Route::get('/show-student/{id}', [StudentApplicationController::class, 'show'])->name('student.show');
 	Route::get('/edit-student/{id}', [StudentApplicationController::class, 'edit'])->name('student.edit');
-	Route::get('/update-student/{id}', [StudentApplicationController::class, 'update'])->name('student.update');
+	Route::post('/update-student/{id}', [StudentApplicationController::class, 'update'])->name('student.update');
 	Route::get('/delete-student/{id}', [StudentApplicationController::class, 'destroy'])->name('student.delete');
+
+	//Manage Staff Profile
+	Route::get('/staff-list', [StaffProfileController::class, 'index'])->name('staff.manage');
+	Route::get('/add-staff', [StaffProfileController::class, 'create'])->name('staff.add');
+	Route::post('/store-staff', [StaffProfileController::class, 'store'])->name('staff.store');
 
 	//Activity Management
 	Route::get('/KAFAActivities', [ActivityController::class, 'index'])->name('Activities');
