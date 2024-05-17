@@ -15,6 +15,7 @@ class StudentApplicationController extends Controller
 
     public function index() {
         $parent = ParentDetail::where('parent_ID', auth()->user()->parent->parent_ID)->first();
+        //Get the student that connect with parent
         $children = StudentApplication::where('parent_ID', $parent->parent_ID)->get();
         return view('ManageStudentRegistration.studentManage',compact('parent', 'children'));
     }
@@ -61,6 +62,7 @@ class StudentApplicationController extends Controller
 
     public function edit($id) {
         $student = StudentApplication::find($id);
+        // dd($student);
         if($student->status == 'accepted') {
             return redirect(route('student.manage'))->with('error', 'accepted application cannot be edited');
         } else {
@@ -74,13 +76,24 @@ class StudentApplicationController extends Controller
 
     public function update(Request $request, $id) {
         $student = StudentApplication::find($id);
+        // dd($student);
+
+        //Update data
         $student -> update($request->all());
         return redirect(route('student.manage'));
     }
 
     public function destroy($id) {
         $student = StudentApplication::find($id);
-        $student -> delete();
+        // dd($student);
+        
+        //Delete data
+        $student->results()->delete();
+        //Delete data connect with student
+        $student->participations()->delete();
+        $student->participations()->delete();
+        $student->delete();
+
         $role = auth()->user()->role;
 
         // Redirect based on the role

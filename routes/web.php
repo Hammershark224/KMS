@@ -68,6 +68,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/staff-list', [StaffProfileController::class, 'index'])->name('staff.manage');
 	Route::get('/add-staff', [StaffProfileController::class, 'create'])->name('staff.add');
 	Route::post('/store-staff', [StaffProfileController::class, 'store'])->name('staff.store');
+	Route::get('/show-staff/{id}', [StaffProfileController::class, 'show'])->name('staff.show');
+	Route::get('/edit-staff/{id}', [StaffProfileController::class, 'edit'])->name('staff.edit');
+	Route::post('/update-staff/{id}', [StaffProfileController::class, 'update'])->name('staff.update');
+	Route::get('/delete-staff/{id}', [StaffProfileController::class, 'destroy'])->name('staff.delete');
 
 	//Activity Management
 	Route::get('/KAFAActivities', [ActivityController::class, 'index'])->name('Activities');

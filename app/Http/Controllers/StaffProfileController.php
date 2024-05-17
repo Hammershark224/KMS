@@ -29,52 +29,52 @@ class StaffProfileController extends Controller
             'identity' => 'required',
             'program' => 'required',
         ]);
-
         // dd($request);
 
         //store data
         $user = User::create($request->all());
         // dd($user);
-        $staff = $user->staff->create();
-
+        
+        //store staff data
+        $staff = $user->staff()->create([
+            'identity' => $request->input('identity'),
+            'program' => $request->input('program'),
+        ]);
+        // dd($staff);
         return redirect(route('staff.manage'));
     }
 
     public function show($id) {
-        $student = StudentApplication::find($id);
-        // dd($student);
-        return view('ManageStudentRegistration.viewForm', compact('student'));
+        $staff = StaffDetail::find($id);
+        // dd($staff);
+        return view('ManageStaffProfile.viewStaffForm', compact('staff'));
     }
 
     public function edit($id) {
-        $student = StudentApplication::find($id);
-        if($student->status == 'accepted') {
-            return redirect(route('student.manage'))->with('error', 'accepted application cannot be edited');
-        } else {
-            $status = [
-                'status' => 'reviewed'
-            ];
-        }
-        $student->update($status);
-        return view('ManageStudentRegistration.editForm', compact('student'));
+        $staff = StaffDetail::find($id);
+        // dd($staff);
+        return view('ManageStaffProfile.editStaffForm', compact('staff'));
     }
 
     public function update(Request $request, $id) {
-        $student = StudentApplication::find($id);
-        $student -> update($request->all());
-        return redirect(route('student.manage'));
+        $staff = StaffDetail::find($id);
+        $staff->update($request->all());
+        // dd($staff);
+
+        //update info
+        $staff->user->update($request->all());
+        // dd($staff->user);
+        return redirect(route('staff.manage'));
     }
 
     public function destroy($id) {
-        $student = StudentApplication::find($id);
-        $student -> delete();
-        $role = auth()->user()->role;
+        $staff = StaffDetail::find($id);
 
-        // Redirect based on the role
-        if ($role === 'admin') {
-            return redirect()->route('student.manage'); // Redirect to the admin view
-        } elseif ($role === 'parent') {
-            return redirect()->route('children.manage');
-        }
+        //delete staff info
+        $staff->delete();
+
+        //delete user info connect with staff
+        $staff->user->delete();
+        return redirect(route('staff.manage'));
     }
 }

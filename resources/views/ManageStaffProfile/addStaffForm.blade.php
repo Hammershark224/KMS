@@ -76,7 +76,7 @@
                                         <option value="Ulum Syariah">Ulum Syariah</option>
                                         <option value="Sirah">Sirah</option>
                                         <option value="Adab">Adab</option>
-                                        <option value="Pelajaran Jawi dan Khatn">Pelajaran Jawi dan Khat</option>
+                                        <option value="Pelajaran Jawi dan Khat">Pelajaran Jawi dan Khat</option>
                                         <option value="Lughah Al-Quran">Lughah Al-Quran</option>
                                         <option value="Penghayatan Cara Hidup Islam (PCHI)">Penghayatan Cara Hidup Islam (PCHI)</option>
                                         <option value="Amali Solat">Amali Solat</option>

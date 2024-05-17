@@ -50,32 +50,32 @@
                                         <td>
                                             <div class="d-flex px-1 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $student->full_name }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $staff->user->full_name }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $student->email }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $staff->user->email }}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $student->role }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $staff->program }}</span>
                                         </td>
                                         <td class="align-middle text-center ">
-                                            {{-- <a href="{{ route('student.show', $student->student_ID) }}"
+                                            <a href="{{ route('staff.show', $staff->staff_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-info btn-sm"
                                                 data-toggle="tooltip" data-original-title="View">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('student.edit', $student->student_ID) }}"
+                                            <a href="{{ route('staff.edit', $staff->staff_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-primary btn-sm"
                                                 data-toggle="tooltip" data-original-title="Edit">
                                                 <i class="fa fa-pen"></i>
                                             </a>
-                                            <a href="{{ route('student.delete', $student->student_ID) }}"
+                                            <a href="{{ route('staff.delete', $staff->staff_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-danger btn-sm"
                                                 data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Confirm to delete?')">
                                                 <i class="fa fa-trash"></i>
-                                            </a> --}}
+                                            </a>
                                         </td>
                                     </tr>
                                     @endforeach
