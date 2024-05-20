@@ -23,6 +23,11 @@
                         <div class="card-body">
                             <form method="POST" action="{{ route('register.perform') }}">
                                 @csrf
+                                <!-- ic input -->
+                                <div class="flex flex-col mb-3">
+                                    <input type="number" name="ic" class="form-control" placeholder="IC No. " aria-label="Email" value="{{ old('ic') }}" >
+                                    @error('ic') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                </div>
                                 <!-- email input -->
                                 <div class="flex flex-col mb-3">
                                     <input type="email" name="email" class="form-control" placeholder="Email" aria-label="Email" value="{{ old('email') }}" >
@@ -31,8 +36,8 @@
 
                                 <!-- username input -->
                                 <div class="flex flex-col mb-3">
-                                    <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Name" value="{{ old('username') }}" >
-                                    @error('username') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                    <input type="text" name="full_name" class="form-control" placeholder="Full Name" aria-label="Name" value="{{ old('full_name') }}" >
+                                    @error('full_name') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
 
                                 <!-- phone number input -->
@@ -53,12 +58,22 @@
                                     @error('password') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
 
+                                <!-- gender input -->
+                                <div class="flex flex-col mb-3">
+                                    <div class="form-group">
+                                        <select class="form-control"  name="gender" required>
+                                            <option disabled selected value="">Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <!-- user type drop down -->
                                 <div class="flex flex-col mb-3">
                                     <select name="role" class="form-control" placeholder="Select your user group">
                                         <option selected disabled>Select your user group</option>
-                                        <option value="student">Student</option>
-                                        <option value="vendor">Outside Vendor</option>
+                                        <option value="parent">Parent</option>
                                     </select>
                                     @error('role') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>

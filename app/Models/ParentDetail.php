@@ -9,6 +9,11 @@ class ParentDetail extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'parent_ID';
+    protected $fillable = [
+        'user_ID', 
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_ID');
