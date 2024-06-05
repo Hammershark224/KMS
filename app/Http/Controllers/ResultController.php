@@ -23,27 +23,36 @@ class ResultController extends Controller
         return view('ManageStudentResult.resultsList', compact('datas', 'examCenters'));
     }
 
-    public function show()
+    public function show($id)
     {
-
-        return view('ManageStudentResult.resultForm');
+        $result = Result::where('result_id', $id)->first();
+        $student = StudentApplication::where('student_ID', $result->student_id)->first();
+        $examCenters = ResultReference::where('code', $result->exam_center_id)->first();
+        $subjects = ResultReference::where('category', 'course')->get();
+        return view('ManageStudentResult.resultForm', compact('result', 'student', 'examCenters', 'subjects'));
     }
 
-    public function slip()
+    public function slip($id)
     {
-        return view('ManageStudentResult.resultSlip');
+        $result = Result::where('result_id', $id)->first();
+        $student = StudentApplication::where('student_ID', $result->student_id)->first();
+        $examCenters = ResultReference::where('code', $result->exam_center_id)->first();
+        $subjects = ResultReference::where('category', 'course')->get();
+        return view('ManageStudentResult.resultSlip', compact('result', 'student', 'examCenters', 'subjects'));
     }
 
     public function create()
     {
-        return view('ManageStudentResult.addResultForm');
+        $examCenters = ResultReference::where('category', 'exam_center')->get();
+        $courses = ResultReference::where('category', 'course')->get();
+        return view('ManageStudentResult.addResultForm', compact('examCenters', 'courses'));
     }
 
     public function store(Request $request)
     {
         $attributes = $request->validate([
             'stu_ic' => 'required',
-            'exam_center' => 'required',
+            'exam_center_id' => 'required',
             'year' => 'required',
             'grade_solat' => 'required',
             'grade_pchi' => 'required',
@@ -53,9 +62,20 @@ class ResultController extends Controller
             'grade_syariah' => 'required',
             'grade_adab' => 'required',
             'grade_lughah' => 'required',
+        ], [
+            'exam_center_id.required' => 'The exam center field is required.',
+            'year.required' => 'The year field is required.'
         ]);
 
-        $result = Result::create($attributes);
+        $student = StudentApplication::where('ic', $attributes['stu_ic'])->first();
+
+        if (!$student) {
+            return back()->withInput()->withErrors(['stu_ic' => 'The IC number is not registered in our system.']);
+        }
+
+        $attributes['student_id'] = $student->student_ID;
+
+        Result::create($attributes);
 
         return redirect()->route('results-list')->with('success', 'Result added successfully.');
     }
@@ -69,11 +89,10 @@ class ResultController extends Controller
         return view('ManageStudentResult.editResultForm', compact('result', 'student', 'examCenters', 'courses'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $result_id)
     {
         $attributes = $request->validate([
-            'stu_ic' => 'required',
-            'exam_center' => 'required',
+            'exam_center_id' => 'required',
             'year' => 'required',
             'grade_solat' => 'required',
             'grade_pchi' => 'required',
@@ -85,15 +104,15 @@ class ResultController extends Controller
             'grade_lughah' => 'required',
         ]);
 
-        $result = Result::find($id);
+        $result = Result::where('result_id', $result_id)->first();
         $result->update($attributes);
 
         return redirect()->route('results-list')->with('success', 'Result updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy($result_id)
     {
-        $result = Result::find($id);
+        $result = Result::where('result_id', $result_id)->first();
         $result->delete();
 
         return redirect()->route('results-list')->with('success', 'Result deleted successfully.');

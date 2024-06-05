@@ -1,22 +1,27 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.subnav', [
-        'title' => 'Result List',
-        'subtitle' => 'Student Result List',
-    ])
+    @include('layouts.navbars.auth.subnav')
     <div class="container-fluid py-4">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text">{{ session('success') }}</span>
+            </div>
+        @endif
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="card-header pb-0" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="card-header pb-0"
+                        style="display: flex; justify-content: space-between; align-items: center;">
                         <p class="font-weight-bold">Student Results List</p>
-                        <a class="btn btn-add" href="{{ route('add-result') }}">+ Add Results</a>
+                        @if (Auth::user()->role == 'k_admin' || Auth::user()->role == 'staff')
+                            <a href="{{ route('add-result') }}" class="btn btn-primary">Add Result</a>
+                        @endif
                     </div>
-
                     <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                        <div class="table-responsive p-4">
+                            <table id="list" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th
@@ -80,22 +85,22 @@
                                                     </td>
 
                                                     <td class="align-middle text-center ">
-                                                        <a href="{{ route('view-result') }}"
+                                                        <a href="{{ Auth::user()->role == 'parent' ? route('view-result-slip', ['id' => $result->result_id]) : route('view-result', ['id' => $result->result_id])}}"
                                                             class="m-1 text-white text-secondary btn btn-view btn-sm"
                                                             data-toggle="tooltip" data-original-title="View">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        @if (Auth::user()->role == 'k_admin')
+                                                        @if (Auth::user()->role == 'k_admin' || Auth::user()->role == 'staff')
                                                             <a href="{{ route('edit-result', ['result_id' => $result->result_id]) }}"
                                                                 class="m-1 text-white text-secondary btn btn-edit btn-sm"
                                                                 data-toggle="tooltip" data-original-title="Edit">
                                                                 <i class="fa fa-pen"></i>
                                                             </a>
-                                                            <a href="{{ route('delete-result') }}"
+                                                            <a href="#" onclick="return confirmDelete('{{ route('delete-result', $result->result_id) }}')"
                                                                 class="m-1 text-white text-secondary btn btn-delete btn-sm"
                                                                 data-toggle="tooltip" data-original-title="Delete">
                                                                 <i class="fa fa-trash"></i>
-                                                            </a>
+                                                             </a>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -114,5 +119,13 @@
             </div>
         </div>
     </div>
+    <script>
+        function confirmDelete(url) {
+            if (confirm("Confirm to delete this student result?")) {
+                window.location.href = url;
+            }
+            return false;
+        }
+    </script>
     @include('layouts.footers.auth.footer')
 @endsection
