@@ -104,6 +104,9 @@
                                                         @endif
                                                     </td>
                                                 </tr>
+                                                @php
+                                                    $index++;
+                                                @endphp
                                             @endforeach
                                         @endforeach
                                     @else
