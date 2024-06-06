@@ -98,4 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/edit-result/{result_id}', [ResultController::class, 'edit'])->name('edit-result');
 	Route::post('/edit-result/{result_id}', [ResultController::class, 'update'])->name('edit-result.perform');
 	Route::get('/delete-result/{result_id}', [ResultController::class, 'destroy'])->name('delete-result');
+
+	//KAFA Bulletin
+	Route::get('/listbulletin', [BulletinController::class, 'bulletin'])->name('listbulletin');
 });
