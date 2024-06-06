@@ -100,5 +100,5 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/delete-result/{result_id}', [ResultController::class, 'destroy'])->name('delete-result');
 
 	//KAFA Bulletin
-	Route::get('/listbulletin', [BulletinController::class, 'bulletin'])->name('listbulletin');
+	Route::get('listbulletin', [BulletinController::class, 'bulletin'])->name('listbulletin');
 });

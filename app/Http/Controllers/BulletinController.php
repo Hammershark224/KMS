@@ -16,7 +16,7 @@ class BulletinController extends Controller
         $role = Auth::user()->role;
         $data['getRecord'] = bulletin::getRecord($role);
         $data['header_title'] = 'Bulletin Board';
-        return view('admin.admin.listbulletin', $data);
+        return view('ManageKAFABulletin.listbulletin', $data);
   }
   
     public function createbulletin()
