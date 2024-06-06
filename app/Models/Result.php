@@ -9,6 +9,8 @@ class Result extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'result_id';
+
     protected $fillable = [
         'student_id', 
         'stu_ic',

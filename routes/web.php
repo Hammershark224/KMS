@@ -88,16 +88,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/DeleteParticipants/{id}', [ActivityController::class, 'unjoin'])->name('unjoin-activity');
 	Route::get('/ListOfParticipants/{id}', [ActivityController::class, 'participantsList'])->name('participants-list');
 	Route::post('/DeleteParticipants/{id}', [ActivityController::class, 'DeleteParticipants'])->name('delete-participants');
+
 	//Result Management
 	Route::get('/results-list', [ResultController::class, 'index'])->name('results-list');
-	Route::get('/view-result', [ResultController::class, 'show'])->name('view-result');
-	Route::get('/view-result-slip', [ResultController::class, 'slip'])->name('view-result-slip');
+	Route::get('/view-result/{id}', [ResultController::class, 'show'])->name('view-result');
+	Route::get('/view-result-slip/{id}', [ResultController::class, 'slip'])->name('view-result-slip');
 	Route::get('/add-result', [ResultController::class, 'create'])->name('add-result');
 	Route::post('/add-result', [ResultController::class, 'store'])->name('add-result.perform');
 	Route::get('/edit-result/{result_id}', [ResultController::class, 'edit'])->name('edit-result');
-	Route::post('/edit-result', [ResultController::class, 'update'])->name('edit-result.perform');
-	Route::get('/delete-result', [ResultController::class, 'destroy'])->name('delete-result');
-
-	//Manage KAFA Bulletin
-	Route::get('listbulletin', [BulletinController::class, 'index'])->name('listbulletin');
+	Route::post('/edit-result/{result_id}', [ResultController::class, 'update'])->name('edit-result.perform');
+	Route::get('/delete-result/{result_id}', [ResultController::class, 'destroy'])->name('delete-result');
 });
