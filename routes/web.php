@@ -29,6 +29,7 @@ use App\Http\Controllers\StudentApplicationController;
 use App\Http\Controllers\StaffProfileController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\BulletinController;
 
 Route::get('/', function () {
 	return redirect('/dashboard');

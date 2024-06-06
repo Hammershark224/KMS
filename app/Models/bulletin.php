@@ -20,7 +20,7 @@ class bulletin extends Model
     static public function getRecord($role)
     {
         $return = self::select('bulletin.*','users.name as createdBy_name')
-           ->join('users', 'users.id', '=','bulletin.createdBy');
+           ->join('users', 'users.user_ID', '=','bulletin.createdBy');
     
     if ($role == 1) {
         // User is admin, fetch bulletins created by admin
