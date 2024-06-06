@@ -97,4 +97,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/edit-result/{result_id}', [ResultController::class, 'edit'])->name('edit-result');
 	Route::post('/edit-result', [ResultController::class, 'update'])->name('edit-result.perform');
 	Route::get('/delete-result', [ResultController::class, 'destroy'])->name('delete-result');
+
+	//Manage KAFA Bulletin
+	Route::get('listbulletin', [BulletinController::class, 'index'])->name('listbulletin');
 });
