@@ -258,6 +258,7 @@ class ActivityController extends Controller
         $activityDate = Carbon::parse($activity->activityDate);
         $currentDate = Carbon::now();
         $isToday = $activityDate->isToday();
+        $isPast = $activityDate->isPast();
 
         if ($activityDate->isToday()) {
             $isToday = true;
@@ -271,7 +272,7 @@ class ActivityController extends Controller
             $student = StudentApplication::find($studentId);
             $students[] = $student;
         }
-        return view('ManageKAFAActivity.viewJoinedActivity', compact('activity', 'students', 'participations', 'isToday'));
+        return view('ManageKAFAActivity.viewJoinedActivity', compact('activity', 'students', 'participations', 'isToday', 'isPast'));
     }
 
     public function unjoin($id)

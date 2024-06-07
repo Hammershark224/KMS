@@ -86,7 +86,7 @@ $role = Auth::user()->role;
           @endif
         </div>
         <div class="text-center">
-          @if ($isToday)
+          @if ($isToday || $isPast )
           @else
           <a href="{{route ('unjoin-activity', [$activity -> activityID])}}" class="m-1 btn btn-primary">Unjoin</a>
           @endif

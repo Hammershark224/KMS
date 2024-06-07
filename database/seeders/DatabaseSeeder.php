@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class DatabaseSeeder extends Seeder
@@ -60,7 +61,15 @@ class DatabaseSeeder extends Seeder
             'gender' => 'male',
             'password' => bcrypt('1234')
         ]);
-
+        DB::table('users')->insert([
+            'full_name' => 'parent3',
+            'phone_num' => '01133633995',
+            'email' => 'parent3@argon.com',
+            'ic' => '5555444556666',
+            'role' => 'parent',
+            'gender' => 'female',
+            'password' => bcrypt('1234')
+        ]);
         DB::table('parent_details')->insert([
             'parent_ID' => '1',
             'user_ID' => '3',
@@ -70,6 +79,11 @@ class DatabaseSeeder extends Seeder
             'parent_ID' => '2',
             'user_ID' => '4',
             'created_at' => '2021-05-07 11:25:24'
+        ]);
+        DB::table('parent_details')->insert([
+            'parent_ID' => '3',
+            'user_ID' => '6',
+            'created_at' => '2021-06-08 11:25:24'
         ]);
 
         DB::table('student_applications')->insert([
@@ -108,7 +122,30 @@ class DatabaseSeeder extends Seeder
             'reason' => 'New student',
             'created_at' => '2021-05-08 11:25:24',
         ]);
-
+        DB::table('student_applications')->insert([
+            'student_ID' => '4',
+            'parent_ID' => '3',
+            'full_name' => 'Ali Bin Mat',
+            'ic' => '444444444444',
+            'gender' => 'male',
+            'date_birth' => '2001-12-25',
+            'address' => 'No 2, Jalan 1, Taman 3',
+            'status' => 'accepted',
+            'reason' => 'New student',
+            'created_at' => '2021-06-08 11:25:24',
+        ]);
+        DB::table('student_applications')->insert([
+            'student_ID' => '5',
+            'parent_ID' => '3',
+            'full_name' => 'Wafi Bin Muhammad',
+            'ic' => '555555555555',
+            'gender' => 'male',
+            'date_birth' => '2001-12-25',
+            'address' => 'No 2, Jalan 1, Taman 3',
+            'status' => 'accepted',
+            'reason' => 'New student',
+            'created_at' => '2021-06-08 11:25:24',
+        ]);
         DB::table('results')->insert([
             'student_id' => '1',
             'stu_ic' => '111111111111',
@@ -154,10 +191,165 @@ class DatabaseSeeder extends Seeder
             'grade_lughah' => 'A',
             'created_at' => '2021-05-06 11:25:24',
         ]);
-
         $this->registerResultReference();
+
+                // Past activities
+                DB::table('activity')->insert([
+                    'activityID' => '1',
+                    'activityName' => 'Past Writing Competition',
+                    'activityDetails' => 'This is a past writing competition for KAFA students.',
+                    'activityLocation' => 'School Hall',
+                    'activityDate' => Carbon::parse('2024-06-07'),
+                    'startTime' => '12:00:00',
+                    'endTime' => '14:00:00',
+                    'activityCapacity' => 10,
+                    'availableSlot' => 8,
+                    'created_at' => '2021-06-05 11:25:24',
+                    'updated_at' => '2021-06-05 11:25:24',
+                ]);
+        
+                DB::table('activity')->insert([
+                    'activityID' => '2',
+                    'activityName' => 'Past Singing Competition',
+                    'activityDetails' => 'This is a past singing competition for KAFA students.',
+                    'activityLocation' => 'School Hall',
+                    'activityDate' => Carbon::parse('2024-06-06'),
+                    'startTime' => '10:00:00',
+                    'endTime' => '12:00:00',
+                    'activityCapacity' => 5,
+                    'availableSlot' => 2,
+                    'created_at' => '2021-06-05 11:25:24',
+                    'updated_at' => '2021-06-05 11:25:24',
+                ]);
+        
+                // Future activities
+                DB::table('activity')->insert([
+                    'activityID' => '3',
+                    'activityName' => 'Writing Competition',
+                    'activityDetails' => 'This is an upcoming writing competition for KAFA students.',
+                    'activityLocation' => 'School Hall',
+                    'activityDate' => Carbon::parse('2024-06-14'),
+                    'startTime' => '12:00:00',
+                    'endTime' => '14:00:00',
+                    'activityCapacity' => 10,
+                    'availableSlot' => 8,
+                    'created_at' => '2021-06-05 11:25:24',
+                    'updated_at' => '2021-06-05 11:25:24',
+                ]);
+        
+                DB::table('activity')->insert([
+                    'activityID' => '4',
+                    'activityName' => 'Singing Competition',
+                    'activityDetails' => 'This is an upcoming singing competition for KAFA students.',
+                    'activityLocation' => 'School Hall',
+                    'activityDate' => Carbon::parse('2024-06-12'),
+                    'startTime' => '10:00:00',
+                    'endTime' => '12:00:00',
+                    'activityCapacity' => 8,
+                    'availableSlot' => 5,
+                    'created_at' => '2021-06-05 11:25:24',
+                    'updated_at' => '2021-06-05 11:25:24',
+                ]);
+        
+                DB::table('activity')->insert([
+                    'activityID' => '5',
+                    'activityName' => 'Upcoming Dance Competition',
+                    'activityDetails' => 'This is an upcoming dance competition for KAFA students.',
+                    'activityLocation' => 'School Hall',
+                    'activityDate' => Carbon::parse('2024-08-14'),
+                    'startTime' => '14:00:00',
+                    'endTime' => '16:00:00',
+                    'activityCapacity' => 6,
+                    'availableSlot' => 1,
+                    'created_at' => '2021-06-05 11:25:24',
+                    'updated_at' => '2021-06-05 11:25:24',
+                ]);
+
+                $this->participationReference();  
+        
     }
 
+    public function participationReference()
+    {
+        $datas = [
+            [
+                'activityID' => 1,
+                'student_id' => 1,
+                'created_at' => Carbon::parse('2022-06-09 12:00:00'),
+            ],
+            [
+                'activityID' => 1,
+                'student_id' => 2,
+                'created_at' => Carbon::parse('2022-06-09 12:00:00'),
+            ],
+            [
+                'activityID' => 2,
+                'student_id' => 3,
+                'created_at' => Carbon::parse('2022-06-09 10:00:00'),
+            ],
+            [
+                'activityID' => 2,
+                'student_id' => 1,
+                'created_at' => Carbon::parse('2024-06-09 10:00:00'),
+            ],
+            [
+                'activityID' => 2,
+                'student_id' => 4,
+                'created_at' => Carbon::parse('2024-06-09 10:00:00'),
+            ],
+            [
+                'activityID' => 3,
+                'student_id' => 1,
+                'created_at' => Carbon::parse('2022-06-09 12:00:00'),
+            ],
+            [
+                'activityID' => 3,
+                'student_id' => 2,
+                'created_at' => Carbon::parse('2022-06-09 12:00:00'),
+            ],
+            [
+                'activityID' => 4,
+                'student_id' => 1,
+                'created_at' => Carbon::parse('2024-06-09 10:00:00'),
+            ],
+            [
+                'activityID' => 4,
+                'student_id' => 4,
+                'created_at' => Carbon::parse('2024-06-09 10:00:00'),
+            ],
+            [
+                'activityID' => 4,
+                'student_id' => 5,
+                'created_at' => Carbon::parse('2024-06-09 10:00:00'),
+            ],
+            [
+                'activityID' => 5,
+                'student_id' => 1,
+                'created_at' => Carbon::parse('2024-06-09 14:00:00'),
+            ],
+            [
+                'activityID' => 5,
+                'student_id' => 2,
+                'created_at' => Carbon::parse('2024-06-09 14:00:00'),
+            ],
+            [
+                'activityID' => 5,
+                'student_id' => 3,
+                'created_at' => Carbon::parse('2024-06-09 14:00:00'),
+            ],
+            [
+                'activityID' => 5,
+                'student_id' => 4,
+                'created_at' => Carbon::parse('2024-06-09 10:00:00'),
+            ],
+            [
+                'activityID' => 5,
+                'student_id' => 5,
+                'created_at' => Carbon::parse('2024-06-09 14:00:00'),
+            ]
+            ];
+            DB::table('participation')->insert($datas);
+    }
     public function registerResultReference()
     {
         $datas = [
