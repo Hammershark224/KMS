@@ -41,10 +41,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if ($students != null)
+                                    @php
+                                        $index = 1;
+                                    @endphp
                                     @foreach ($students as $student)
                                     <tr>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">1</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $index }}</span>
                                         </td>
                                         <td>
                                             <div class="d-flex px-1 py-1">
@@ -77,7 +81,15 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    @php
+                                        $index++;
+                                    @endphp
                                     @endforeach
+                                    @else
+                                    <tr>
+                                        <td colspan="6" class="text-center">No data available in table</td>
+                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -124,10 +136,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if ($children != null)
+                                        @php
+                                            $index = 1;
+                                        @endphp
                                     @foreach ($children as $child)
                                     <tr>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">1</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $index }}</span>
                                         </td>
                                         <td>
                                             <div class="d-flex px-1 py-1">
@@ -155,7 +171,15 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    @php
+                                        $index++;
+                                    @endphp
                                     @endforeach
+                                    @else
+                                    <tr>
+                                        <td colspan="6" class="text-center">No data available in table</td>
+                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
