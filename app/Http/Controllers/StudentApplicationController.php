@@ -97,10 +97,10 @@ class StudentApplicationController extends Controller
         $role = auth()->user()->role;
 
         // Redirect based on the role
-        if ($role === 'admin') {
-            return redirect()->route('student.manage'); // Redirect to the admin view
+        if ($role === 'k_admin') {
+            return redirect(route('student.manage')); // Redirect to the admin view
         } elseif ($role === 'parent') {
-            return redirect()->route('children.manage');
+            return redirect(route('children.manage'));
         }
     }
 }
