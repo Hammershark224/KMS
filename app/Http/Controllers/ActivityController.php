@@ -14,12 +14,26 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $datas = Activity::orderByDesc('created_at')->get();
-        return view('ManageKAFAActivity.KAFAActivities', compact('datas'));
+        $currentDate = Carbon::now();
+        //display upcoming activities
+        $upcomingActivities = Activity::where('activityDate', '>', $currentDate)
+                    ->orderByDesc('created_at')
+                    ->get();
+        //display previous activities
+        $previousActivities = Activity::where('activityDate', '<=', $currentDate)
+                    ->orderByDesc('activityDate')
+                    ->get();
+        return view('ManageKAFAActivity.KAFAActivities', compact('upcomingActivities', 'previousActivities'));
     }
 
     public function create()
     {
+        $role = Auth::user()->role;
+        if ($role == 'parent') {
+            // Parents cannot edit activities, redirect them to the activity index page
+            return redirect()->route('Activities')
+            ->with('error', 'You do not have permission to create activities');
+        }
         return view('ManageKAFAActivity.CreateActivity');
     }
 
@@ -58,7 +72,20 @@ class ActivityController extends Controller
 
     public function edit($id)
     {
+        $role = Auth::user()->role;
+        if ($role=='parent') {
+        // Parents cannot edit activities, redirect them to the activity index page
+             return redirect()->route('Activities')
+            ->with('error', 'You do not have permission to edit activities');
+        }
         $activity = Activity::find($id);
+        $currentDate = Carbon::now();
+
+        if ($activity->activityDate <= $currentDate) {
+            // Activity date has reached or passed the current date, cannot edit
+            return redirect()->route('Activities')
+                ->with('error', 'Cannot edit activity, activity date has already passed');
+        }
         return view('ManageKAFAActivity.EditActivity', compact('activity'));
     }
 
@@ -98,11 +125,10 @@ class ActivityController extends Controller
         $activity = Activity::find($id);
         $activityDate = Carbon::parse($activity->activityDate);
         $currentDate = Carbon::now();
-        
 
         // check the slot availability is 0 or not
         if ($activity->availableSlot == 0) {
-            return redirect()->route('view-activity', ['id' => $id])->with('error', 'Activity is full.');
+            return redirect()->route('Activities', ['id' => $id])->with('error', 'Activity is full.');
         }
     
         if ($activityDate->isToday() || $activityDate->isPast()) {
@@ -140,7 +166,7 @@ class ActivityController extends Controller
             ]);
         }
 
-        $activity->availableSlot -= count($selectedParticipants);
+        $activity->decrement('availableSlot', count($selectedParticipants));
         $activity->save();
 
         return redirect()->route('view-activity', ['id' => $activityID])->with('success', 'Added Participants successfully.');
@@ -152,11 +178,23 @@ class ActivityController extends Controller
             ->where('user_ID', Auth::user()->user_ID)
             ->first()
             ->studentApplication;
-
+    
         $activityIDs = $datas->flatMap->participations->pluck('activityID')->unique();
         $activities = Activity::whereIn('activityID', $activityIDs)->get();
-
-        $groupedActivities = $activities->groupBy('activityID')->map(function ($activities) use ($datas) {
+    
+        $now = Carbon::now();
+    
+        $upcomingActivities = $activities->filter(function ($activity) use ($now) {
+            $startDate = Carbon::parse($activity->activityDate);
+            return $startDate->gte($now);
+        });
+    
+        $previousActivities = $activities->filter(function ($activity) use ($now) {
+            $startDate = Carbon::parse($activity->activityDate);
+            return $startDate->lt($now);
+        });
+    
+        $groupedUpcomingActivities = $upcomingActivities->groupBy('activityID')->map(function ($activities) use ($datas) {
             $children = [];
             foreach ($activities as $activity) {
                 $participations = $datas->flatMap->participations->where('activityID', $activity->activityID);
@@ -168,13 +206,31 @@ class ActivityController extends Controller
             }
             return ['activity' => $activities->first(), 'children' => $children];
         });
-
-        return view('ManageKAFAActivity.JoinedActivities', compact('groupedActivities'));
+    
+        $groupedPastActivities = $previousActivities->groupBy('activityID')->map(function ($activities) use ($datas) {
+            $children = [];
+            foreach ($activities as $activity) {
+                $participations = $datas->flatMap->participations->where('activityID', $activity->activityID);
+                foreach ($participations as $participation) {
+                    $studentId = $participation->student_id;
+                    $child = StudentApplication::find($studentId)->full_name;
+                    $children[] = $child;
+                }
+            }
+            return ['activity' => $activities->first(), 'children' => $children];
+        });
+    
+        return view('ManageKAFAActivity.JoinedActivities', compact('groupedUpcomingActivities', 'groupedPastActivities'));
     }
 
     public function participantsList($id)
     {
         $activity = Activity::find($id);
+        if (Auth::user()->role  == 'parent') {
+            // Parents cannot edit activities, redirect them to the activity index page
+            return redirect()->route('Activities')
+            ->with('error', 'You do not have permission to access this page');
+        }
         $participants = Participation::with('students.participants')->where('activityID', $id)->get();
         $students = [];
         foreach ($participants as $participant) {

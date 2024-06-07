@@ -82,4 +82,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(ParentDetail::class, 'user_ID');
     }
+
+    public function role()
+    {
+    return $this->belongsTo(Role::class);
+    }
 }
