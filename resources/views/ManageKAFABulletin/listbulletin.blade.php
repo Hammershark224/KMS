@@ -39,8 +39,8 @@
                                             <label>Message To</label>
                                             <select class="form-control" name="publishTo">
                                                 <option value="">Select</option>
-                                                <option {{ Request::get('publishTo') == 2 ? 'selected' : '' }} value="2">Teacher</option>
-                                                <option {{ Request::get('publishTo') == 3 ? 'selected' : '' }} value="3">Parent</option>
+                                                <option {{ Request::get('publishTo') == 4 ? 'selected' : '' }} value="4">Teacher</option>
+                                                <option {{ Request::get('publishTo') == 2 ? 'selected' : '' }} value="2">Parent</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-2 d-flex align-items-end">
@@ -79,12 +79,12 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             @foreach($value->getBulletinDetails as $bulletinDetails)
-                                                @if($bulletinDetails->publishTo == 2)
-                                                    <div>Teacher</div>
-                                                @elseif($bulletinDetails->publishTo == 3)
+                                               @if($bulletinDetails->publishTo == 2)
                                                     <div>Parent</div>
-                                                @elseif($bulletinDetails->publishTo == 4)
+                                                @elseif($bulletinDetails->publishTo == 3)
                                                     <div>Muip</div>
+                                                @elseif($bulletinDetails->publishTo == 4)
+                                                    <div>Teacher</div>
                                                 @endif
                                             @endforeach
                                         </td>
@@ -92,16 +92,16 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $value->createdBy_full_name }}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ date('d-m-Y', strtotime($value->created_at)) }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ date('d-m-Y', strtotime($value->createdAt)) }}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                           <a href="{{ url('viewbulletin' . $value->bulletinId) }}" class="p-1 text-white text-secondary button view-bg justify-content-center ps-2 me-2 border border-dark" data-toggle="tooltip" data-original-title="View">
+                                           <a href="{{ url('viewbulletin/' . $value->bulletinId) }}" class="p-1 text-white text-secondary button view-bg justify-content-center ps-2 me-2 border border-dark" data-toggle="tooltip" data-original-title="View">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="{{ url('editbulletin' . $value->bulletinId) }}" class="p-1 text-white text-secondary button edit-bg ps-2 pe-1 me-2 border border-dar" data-toggle="tooltip" data-original-title="Edit">
+                                            <a href="{{ url('editbulletin/' . $value->bulletinId) }}" class="p-1 text-white text-secondary button edit-bg ps-2 pe-1 me-2 border border-dar" data-toggle="tooltip" data-original-title="Edit">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
-                                            <a href="{{ url('deletebulletin' . $value->bulletinId) }}" class="p-1 text-white text-secondary button bg-danger ps-2 pe-2 border border-dark" data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this bulletin?');">
+                                            <a href="{{ url('deletebulletin/' . $value->bulletinId) }}" class="p-1 text-white text-secondary button bg-danger ps-2 pe-2 border border-dark" data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this bulletin?');">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                             

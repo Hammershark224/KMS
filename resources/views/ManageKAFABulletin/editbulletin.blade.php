@@ -33,18 +33,18 @@
                                 </div>
 
                                 @php
-                                    $publishTo_teacher = $getRecord->getBulletinDetailsToSingle($getRecord->bulletinId, 2);
-                                    $publishTo_parent = $getRecord->getBulletinDetailsToSingle($getRecord->bulletinId, 3);
+                                    $publishTo_teacher = $getRecord->getBulletinDetailsToSingle($getRecord->bulletinId, 4);
+                                    $publishTo_parent = $getRecord->getBulletinDetailsToSingle($getRecord->bulletinId, 2);
                                     
                                 @endphp
 
                                 <div class="form-group">
                                     <label style="display: block;">Publish To </label>
                                     <label style="margin-right: 40px;">
-                                    <input {{ !empty($publishTo_teacher) ? 'checked' : '' }} type="checkbox" value="2" name="publishTo[]"> Teacher
+                                    <input {{ !empty($publishTo_teacher) ? 'checked' : '' }} type="checkbox" value="4" name="publishTo[]"> Teacher
                                     </label>
                                     <label style="margin-right: 40px;">
-                                    <input {{!empty($publishTo_parent) ? 'checked' : '' }} type="checkbox" value="3" name="publishTo[]"> Parent</label>               
+                                    <input {{!empty($publishTo_parent) ? 'checked' : '' }} type="checkbox" value="2" name="publishTo[]"> Parent</label>               
                                 </div>
 
                                 <div class="form-group">

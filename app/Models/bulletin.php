@@ -27,9 +27,9 @@ class bulletin extends Model
     if ($role == 1) {
         // User is admin, fetch bulletins created by admin
         $return = $return->where('users.role', '=', 1);
-    } elseif ($role == 4) {
+    } elseif ($role == 3) {
         // User is muip, fetch bulletins created by muip
-        $return = $return->where('users.role', '=', 4);
+        $return = $return->where('users.role', '=', 3);
     }
         
         if(!empty(Request::get('bulletinTitle')))
@@ -63,8 +63,8 @@ class bulletin extends Model
 
     static public function getRecordUser($publishTo)
     {
-        $return = bulletin::select('bulletin.*','users.name as createdBy_name')
-               ->join('users', 'users.id', '=','bulletin.createdBy');
+        $return = bulletin::select('bulletin.*','users.full_name as createdBy_full_name')
+               ->join('users', 'users.user_ID', '=','bulletin.createdBy');
         
         $return = $return->join('publish', 'publish.bulletin_bulletinId','=', 'bulletinId');
 
@@ -89,6 +89,11 @@ class bulletin extends Model
 
         $return = $return->orderBy('bulletin.bulletinId','desc')
                ->paginate(20);
+        
+            // Reload models from the database to ensure you have the latest data
+    $return->each(function ($item, $key) {
+        $item->fresh();
+    });
         
         return $return;
     }

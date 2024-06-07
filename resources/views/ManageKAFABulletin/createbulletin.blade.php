@@ -34,8 +34,8 @@
 
                                 <div class="form-group">
                                     <label style="display: block;">Publish To </label>
-                                    <label style="margin-right: 40px;"><input type="checkbox" value="2" name="publishTo[]"> Teacher</label>
-                                    <label><input type="checkbox" value="3" name="publishTo[]"> Parent</label>               
+                                    <label style="margin-right: 40px;"><input type="checkbox" value="4" name="publishTo[]"> Teacher</label>
+                                    <label><input type="checkbox" value="2" name="publishTo[]"> Parent</label>               
                                 </div>
 
                                 <div class="form-group">
