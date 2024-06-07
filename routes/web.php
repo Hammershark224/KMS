@@ -102,4 +102,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//KAFA Bulletin
 	Route::get('listbulletin', [BulletinController::class, 'bulletin'])->name('listbulletin');
+	Route::get('createbulletin', [BulletinController::class, 'createbulletin'])->name('createbulletin');
+    Route::post('createbulletin', [BulletinController::class, 'storebulletin'])->name('createbulletin');
+    Route::get('editbulletin{bulletinId}', [BulletinController::class, 'editbulletin'])->name('editbulletin');
+    Route::post('editbulletin{bulletinId}', [BulletinController::class, 'updatebulletin'])->name('updatebulletin');
+	Route::get('viewbulletin{bulletinId}', [BulletinController::class, 'viewbulletin'])->name('viewbulletin');
+    Route::get('deletebulletin{bulletinId}', [BulletinController::class, 'deletebulletin'])->name('deletebulletin');
 });

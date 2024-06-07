@@ -11,6 +11,8 @@ class bulletin extends Model
 
     protected $table = 'bulletin';
     protected $primaryKey = 'bulletinId'; // Specify the primary key column
+    const CREATED_AT = 'createdAt';
+    const UPDATED_AT = 'updatedAt'; 
     
     static public function getSingle($bulletinId)
     {
@@ -19,7 +21,7 @@ class bulletin extends Model
 
     static public function getRecord($role)
     {
-        $return = self::select('bulletin.*','users.name as createdBy_name')
+        $return = self::select('bulletin.*','users.full_name as createdBy_full_name')
            ->join('users', 'users.user_ID', '=','bulletin.createdBy');
     
     if ($role == 1) {

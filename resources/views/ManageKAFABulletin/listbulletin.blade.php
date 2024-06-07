@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-@include('layouts.navbars.auth.topnav', ['title' => 'Bulletin List'], ['subtitle' => 'KAFA Bulletin List'])
+@include('layouts.navbars.auth.topnav', ['title' => 'Bulletin List'], ['subtitle' => 'KAFA Bulletin'])
 
 <div class="container-fluid py-4">
     <div class="row">
@@ -89,18 +89,22 @@
                                             @endforeach
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $value->createdBy_name }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $value->createdBy_full_name }}</span>
                                         </td>
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{ date('d-m-Y', strtotime($value->created_at)) }}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <a href="{{ url('editbulletin' . $value->bulletinId) }}" class="p-1 text-white text-secondary button view-bg justify-content-center ps-2 me-2 border border-dark" data-toggle="tooltip" data-original-title="Edit">
+                                           <a href="{{ url('viewbulletin' . $value->bulletinId) }}" class="p-1 text-white text-secondary button view-bg justify-content-center ps-2 me-2 border border-dark" data-toggle="tooltip" data-original-title="View">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="{{ url('editbulletin' . $value->bulletinId) }}" class="p-1 text-white text-secondary button edit-bg ps-2 pe-1 me-2 border border-dar" data-toggle="tooltip" data-original-title="Edit">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
                                             <a href="{{ url('deletebulletin' . $value->bulletinId) }}" class="p-1 text-white text-secondary button bg-danger ps-2 pe-2 border border-dark" data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this bulletin?');">
                                                 <i class="fa fa-trash"></i>
                                             </a>
+                                            
                                         </td>
                                     </tr>
                                 @empty
@@ -111,7 +115,7 @@
                             </tbody>
                         </table>
 
-                        <div class="p-2 float-right">
+                        <div class="p-3 float-right">
                             {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
                         </div>
                     </div>
