@@ -30,7 +30,7 @@ $role = Auth::user()->role;
           <div class="col-md-6">
             <div class="form-group">
               <label for="activityDate">Activity Date</label>
-              <input type="date" class="form-control" id="activityDate" value="{{ $activity->activityDate }}" name="activityDate">
+              <input type="date" class="form-control" id="activityDate" value="{{ $activity->activityDate }}" name="activityDate" min="<?php echo date('Y-m-d');?>">
             </div>
           </div>
           <div class="col-md-6">

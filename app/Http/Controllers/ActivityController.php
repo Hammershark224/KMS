@@ -8,6 +8,7 @@ use App\Models\ParentDetail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\StudentApplication;
 use App\Models\Participation;
+use Carbon\Carbon;
 
 class ActivityController extends Controller
 {
@@ -44,7 +45,15 @@ class ActivityController extends Controller
     public function show($id)
     {
         $activity = Activity::find($id);
-        return view('ManageKAFAActivity.ViewActivity', compact('activity'));
+        $activityDate = Carbon::parse($activity->activityDate);
+        $currentDate = Carbon::now();
+
+        if ($activityDate->isToday()) {
+            $isToday = true;
+        } else {
+            $isToday = false;
+        }
+        return view('ManageKAFAActivity.ViewActivity', compact('activity', 'isToday'));
     }
 
     public function edit($id)
@@ -87,6 +96,20 @@ class ActivityController extends Controller
     public function join($id)
     {
         $activity = Activity::find($id);
+        $activityDate = Carbon::parse($activity->activityDate);
+        $currentDate = Carbon::now();
+        
+
+        // check the slot availability is 0 or not
+        if ($activity->availableSlot == 0) {
+            return redirect()->route('view-activity', ['id' => $id])->with('error', 'Activity is full.');
+        }
+    
+        if ($activityDate->isToday() || $activityDate->isPast()) {
+            // Activity date has reached or passed, display an error message
+            return redirect()->route('Activities')->with('error', 'Activity has already started or ended.');
+        }
+    
         if (Auth::user()->role == 'parent') {
             $students = ParentDetail::with('studentApplication')->where('user_ID', Auth::user()->user_ID)->first();
             $datas = $students->studentApplication;
@@ -94,6 +117,7 @@ class ActivityController extends Controller
         }
     }
 
+    //for parent to add their children to the activity
     public function addParticipants(Request $request)
     {
         $selectedParticipants = $request->input('participants', []);
@@ -106,6 +130,10 @@ class ActivityController extends Controller
         $activity = Activity::find($activityID);
 
         foreach ($selectedParticipants as $studentId) {
+            // check if student is already participating in the activity
+            if (Participation::where('activityID', $activityID)->where('student_id', $studentId)->exists()) {
+                return redirect()->route('view-activity', ['id' => $activityID])->with('error', "The student is already participating in this activity.");
+            }
             Participation::create([
                 'activityID' => $activityID,
                 'student_id' => $studentId,
@@ -171,19 +199,36 @@ class ActivityController extends Controller
         $studentIds = $participations->pluck('student_id');
         $students = StudentApplication::whereIn('student_id', $studentIds)->get();
 
+        $activityDate = Carbon::parse($activity->activityDate);
+        $currentDate = Carbon::now();
+        $isToday = $activityDate->isToday();
+
+        if ($activityDate->isToday()) {
+            $isToday = true;
+        } else {
+            $isToday = false;
+        }
+
         $students = [];
         foreach ($participations as $participation) {
             $studentId = $participation->student_id;
             $student = StudentApplication::find($studentId);
             $students[] = $student;
         }
-        return view('ManageKAFAActivity.viewJoinedActivity', compact('activity', 'students', 'participations'));
+        return view('ManageKAFAActivity.viewJoinedActivity', compact('activity', 'students', 'participations', 'isToday'));
     }
 
     public function unjoin($id)
     {
         $activity = Activity::find($id);
-
+        $activityDate = Carbon::parse($activity->activityDate);
+        $currentDate = Carbon::now();
+        
+        if ($activityDate->isToday() || $activityDate->isPast()) {
+            // Activity date has reached or passed, display an error message
+            return redirect()->to(route('joined-activity', ['id' => $id]))->with('error', 'Activity has already started or ended.');
+        }
+    
         $datas = ParentDetail::with('studentApplication.participations.activity')
             ->where('user_ID', Auth::user()->user_ID)
             ->first()

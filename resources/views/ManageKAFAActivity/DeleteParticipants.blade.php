@@ -37,7 +37,7 @@ $index=1;
         @endif
         <div class="text-center">
           <button type="submit" class="btn btn-submit m-1">Submit</button>
-          <a href="{{ route('Activities') }}" class="m-1 btn btn-dark">Cancel</a>
+          <a href="{{ route('joined-activities') }}" class="m-1 btn btn-dark">Cancel</a>
         </div>
       </form>
     </div>

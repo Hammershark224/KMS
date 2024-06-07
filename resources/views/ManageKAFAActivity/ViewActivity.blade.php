@@ -36,7 +36,8 @@ $role = Auth::user()->role;
           <div class="col-md-6">
             <div class="form-group">
               <label for="activityLocation">Activity Location</label>
-              <input type="text" class="form-control" id="activityLocation" value="{{ $activity->activityLocation }}" disabled>
+              <input type="text" class="form-control" id="activityLocation" value="{{ $activity->activityLocation }}"
+                disabled>
             </div>
           </div>
         </div>
@@ -58,22 +59,28 @@ $role = Auth::user()->role;
           <div class="col-md-6">
             <div class="form-group">
               <label for="activityCapacity">Activity Capacity</label>
-              <input type="number" class="form-control" id="activityCapacity" value="{{ $activity->activityCapacity }}" disabled>
+              <input type="number" class="form-control" id="activityCapacity" value="{{ $activity->activityCapacity }}"
+                disabled>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="availableSlots">Available Slots</label>
-              <input type="number" class="form-control" id="availableSlots" value="{{ $activity->availableSlot }}" disabled>
+              <input type="number" class="form-control" id="availableSlots" value="{{ $activity->availableSlot }}"
+                disabled>
             </div>
           </div>
         </div>
         <div class="text-center">
           @if ($role == "k_admin" || $role == "staff")
-          <a href="{{ route('participants-list',['id' => $activity->activityID]) }}" class="btn btn-primary m-1" >View Participants</a>
+          <a href="{{ route('participants-list',['id' => $activity->activityID]) }}" class="btn btn-primary m-1">View
+            Participants</a>
           @endif
           @if ($role == "parent")
+          @if ($isToday)
+          @else
           <a href="{{ route('join-activity',['id' => $activity->activityID]) }}" class="btn btn-submit m-1">Join</a>
+          @endif
           @endif
           <a href="{{ route('Activities') }}" class="m-1 btn btn-dark">Back</a>
         </div>
@@ -87,13 +94,13 @@ $role = Auth::user()->role;
 @endsection
 @push('scripts')
 <script>
-  window.onload = function() {
-    @if(session('success'))
-    alert("{{ session('success') }}");
-    @endif
+window.onload = function() {
+  @if(session('success'))
+  alert("{{ session('success') }}");
+  @endif
 
-    @if(session('error'))
-    alert("{{ session('error') }}");
-    @endif
-  }
-  </script>
+  @if(session('error'))
+  alert("{{ session('error') }}");
+  @endif
+}
+</script>
