@@ -100,7 +100,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/edit-result/{result_id}', [ResultController::class, 'update'])->name('edit-result.perform');
 	Route::get('/delete-result/{result_id}', [ResultController::class, 'destroy'])->name('delete-result');
 
-	//KAFA Bulletin
+
+// KAFA Bulletin   
 	Route::get('/listbulletin', [BulletinController::class, 'bulletin'])->name('listbulletin');
 	Route::get('/createbulletin', [BulletinController::class, 'createbulletin'])->name('createbulletin');
     Route::post('/createbulletin', [BulletinController::class, 'storebulletin'])->name('createbulletin');
@@ -110,4 +111,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/deletebulletin/{bulletinId}', [BulletinController::class, 'deletebulletin'])->name('deletebulletin');
 	Route::get('/parentbulletin', [BulletinController::class, 'mybulletinparent'])->name('parentbulletin');
 	Route::get('/teacherbulletin', [BulletinController::class, 'mybulletinteacher'])->name('teacherbulletin');
+	
 });

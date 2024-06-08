@@ -24,12 +24,12 @@ class bulletin extends Model
         $return = self::select('bulletin.*','users.full_name as createdBy_full_name')
            ->join('users', 'users.user_ID', '=','bulletin.createdBy');
     
-    if ($role == 1) {
+    if ($role == 'k_admin') {
         // User is admin, fetch bulletins created by admin
-        $return = $return->where('users.role', '=', 1);
-    } elseif ($role == 3) {
+        $return = $return->where('users.role', '=', 'k_admin');
+    } elseif ($role == 'muip') {
         // User is muip, fetch bulletins created by muip
-        $return = $return->where('users.role', '=', 3);
+        $return = $return->where('users.role', '=', 'muip');
     }
         
         if(!empty(Request::get('bulletinTitle')))

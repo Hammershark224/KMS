@@ -77,7 +77,7 @@ $role = Auth::user()->role;
       @endif
 
       {{-- MUIP --}}
-      @if ($role == 'MUIP')
+      @if ($role == 'muip')
       <li class="nav-item">
         <a class="nav-link {{ Route::currentRouteName() == 'show-report' ? 'active' : '' }}" href="">
           <div
