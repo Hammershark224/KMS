@@ -25,7 +25,6 @@ $role = Auth::user()->role;
         $index = 1;
         @endphp
         @foreach ($datas as $data)
-        @foreach ($data->results as $result)
         <input type="hidden" name="activityID" value="{{ $activity->activityID }}">
         <div class="form-check mt-3">
           <input class="form-check-input participant-checkbox" type="checkbox" name="participants[]"
@@ -36,7 +35,7 @@ $role = Auth::user()->role;
         </div>
 
 
-        @endforeach
+
         @endforeach
         @else
         <p class="text-center">No data available in table</p>
