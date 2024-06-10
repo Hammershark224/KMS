@@ -10,7 +10,7 @@ class StudentApplicationController extends Controller
 {
     public function indexAdmin() {
         $students = StudentApplication::all();
-        return view('ManageStudentRegistration.studentManage', ['students'=>$students]);
+        return view('ManageStudentRegistration.studentManage', compact('students'));
     }
 
     public function index() {
@@ -22,12 +22,12 @@ class StudentApplicationController extends Controller
 
     public function create() {
         $parents = ParentDetail::all();
-        return view('ManageStudentRegistration.applyForm', ['parents'=>$parents]);
+        return view('ManageStudentRegistration.applyForm', compact('parents'));
     }
 
     public function store(Request $request) {
         $user = auth()->user();
-        $parent = ParentDetail::where('user_ID', $user['user_ID'])->first();
+        $parent = ParentDetail::where('user_ID', $user->user_ID)->first();
         //validate the input
         $request->validate([
             'full_name' => 'required|string',
@@ -54,14 +54,14 @@ class StudentApplicationController extends Controller
         return redirect(route('children.manage'));
     }
 
-    public function show($id) {
-        $student = StudentApplication::find($id);
+    public function show($full_name) {
+        $student = StudentApplication::where('full_name', $full_name)->firstOrFail();
         // dd($student);
         return view('ManageStudentRegistration.viewForm', compact('student'));
     }
 
-    public function edit($id) {
-        $student = StudentApplication::find($id);
+    public function edit($full_name) {
+        $student = StudentApplication::where('full_name', $full_name)->firstOrFail();
         // dd($student);
         if($student->status == 'accepted') {
             return redirect(route('student.manage'))->with('error', 'accepted application cannot be edited');

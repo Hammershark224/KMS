@@ -88,11 +88,16 @@
                                     <label for="example-text-input" class="form-control-label">Status</label>
                                     <input class="form-control" type="text" name="status" value="{{ $student->status }}" readonly>
                                 </div>
-                            </div>    
+                            </div>
+                            @if ($student->status == 'rejected')
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Rejected Reason</label>
+                                    <textarea class="form-control" name="reason" id="reason" disabled>{{ $student->reason }}</textarea>
+                                </div>
+                            </div>  
+                            @endif   
                             <div class="d-flex justify-content-center">
-                                @if ($role == "k_admin")
-                                    <a href="{{ route('student.manage') }}" class="btn btn-secondary btn-sm mx-2">Back</a>
-                                @endif
                                 @if ($role == "parent")
                                     <a href="{{ route('children.manage') }}" class="btn btn-secondary btn-sm mx-2">Back</a>
                                 @endif

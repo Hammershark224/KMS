@@ -77,7 +77,7 @@
                                             </a>
                                             <a href="{{ route('staff.delete', $staff->staff_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-danger btn-sm"
-                                                data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Confirm to delete?')">
+                                                data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Confirm to delete {{ $staff->user->full_name }}?')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>
