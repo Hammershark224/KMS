@@ -266,7 +266,73 @@ class DatabaseSeeder extends Seeder
                 ]);
 
                 $this->participationReference();  
-        
+
+
+                // Seed bulletin table
+                 DB::table('bulletin')->insert([
+                 'bulletinId' => '1',
+                 'bulletinTitle' => 'Perubahan Jadual Pengajaran Sempena Cuti Sekolah',
+                 'publishDate' => Carbon::now(),
+                 'bulletinDetails' => 'Salam sejahtera kepada semua warga KAFA,
+
+    Diberitahu bahawa terdapat perubahan jadual pengajaran sempena cuti sekolah yang akan berlaku. Berikut adalah butiran perubahan tersebut:
+
+    Tarikh: 20 Februari 2022 (Ahad)
+    Tempat: Dewan KAFA Utama
+    Masa: 8:00 pagi - 12:00 tengah hari
+
+    Sila berikan perhatian kepada semua guru dan pelajar untuk hadir tepat pada masa yang ditetapkan. Terima kasih.
+
+    Sekian, terima kasih.',
+                 'createdBy' => 1,
+                 'createdAt' => Carbon::now(),
+                 'updatedAt' => Carbon::now(),
+                ]);
+
+                DB::table('bulletin')->insert([
+                    'bulletinId' => '2',
+                    'bulletinTitle' => 'Important Announcement: Upcoming School Event',
+                    'publishDate' => Carbon::now(),
+                    'bulletinDetails' => 'Assalamualaikum w.b.t. kepada warga KAFA,
+
+    Berikut adalah panduan langkah demi langkah untuk memohon bantuan kelas KAFA oleh Majlis Ugama Islam dan Adat Resam Melayu Pahang (MUIP):
+
+    1. Sila log masuk ke portal permohonan bantuan kelas KAFA di laman web rasmi MUIP.
+    2. Isi borang permohonan dengan maklumat yang diperlukan seperti butiran sekolah, jumlah pelajar, dan sebagainya.
+    3. Sertakan dokumen sokongan yang diperlukan seperti surat pengesahan dari pihak sekolah atau jawatankuasa pengurusan KAFA.
+    4. Mohon semakan dokumen dan pastikan semua maklumat lengkap dan betul sebelum menghantar permohonan.
+    5. Selepas penghantaran, tunggu notifikasi daripada MUIP mengenai status permohonan anda.
+
+    Sekiranya terdapat sebarang pertanyaan atau bantuan tambahan, sila hubungi pejabat MUIP.
+
+    Terima kasih.
+
+    Wassalam,',
+                    'createdBy' => 3,
+                    'createdAt' => Carbon::now(),
+                    'updatedAt' => Carbon::now(),
+                   ]);
+
+                   DB::table('publish')->insert([
+                    'bulletinId' => 1, 
+                    'publishTo' => 2, 
+                    'createdAt' => Carbon::now(),
+                    'updatedAt' => Carbon::now(),
+                ]);
+                   DB::table('publish')->insert([
+                    'bulletinId' => 1, 
+                    'publishTo' => 4, 
+                    'createdAt' => Carbon::now(),
+                    'updatedAt' => Carbon::now(),
+                ]);
+
+                  DB::table('publish')->insert([
+                    'bulletinId' => 2, 
+                    'publishTo' => 4, 
+                    'createdAt' => Carbon::now(),
+                    'updatedAt' => Carbon::now(),
+                ]);
+       
     }
 
     public function participationReference()
