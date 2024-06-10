@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('publish', function (Blueprint $table) {
-            $table->id(publishId);
-            $table->foreignId(bulletin_bulletinId)->references("bulletin_bulletinId")->on("bulletin");
-            $table->integer(publishTo);
-            $table->datetime(createdAt);
-            $table->datetime(updatedAt);   
-
+            $table->id('publishId');
+            $table->foreignId('bulletin_id')->references('bulletinId')->on('bulletin');
+            $table->integer('publishTo');
+            $table->datetime('createdAt');
+            $table->datetime('updatedAt');   
         });
     }
 
