@@ -15,11 +15,11 @@ class publish extends Model
 
     public function bulletin()
     {
-        return $this->belongsTo(bulletin::class, 'bulletin_bulletinId', 'bulletinId');
+        return $this->belongsTo(bulletin::class, 'bulletinId', 'bulletinId');
     }
     
     static public function DeleteRecord($bulletinId)
     {
-        publish::where('bulletin_bulletinId','=',$bulletinId)->delete();
+        publish::where('bulletinId','=',$bulletinId)->delete();
     }
 } 

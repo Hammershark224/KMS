@@ -39,7 +39,7 @@ class BulletinController extends Controller
             foreach ($request->publishTo as $publishTo)
             {
                 $bulletinDetails = new publish;
-                $bulletinDetails->bulletin_bulletinId = $save->bulletinId;
+                $bulletinDetails->bulletinId = $save->bulletinId;
                 $bulletinDetails->publishTo = $publishTo;
                 $bulletinDetails->save();
             }
@@ -64,14 +64,14 @@ class BulletinController extends Controller
         $save->bulletinDetails = $request->bulletinDetails;     
         $save->save();
 
-        publish::where('bulletin_bulletinId',$bulletinId)->delete();
+        publish::where('bulletinId',$bulletinId)->delete();
 
         if(!empty($request->publishTo))
         {
             foreach ($request-> publishTo as $publishTo)
             {
                 $bulletinDetails = new publish;
-                $bulletinDetails->bulletin_bulletinId = $save->bulletinId;
+                $bulletinDetails->bulletinId = $save->bulletinId;
                 $bulletinDetails->publishTo = $publishTo;
                 $bulletinDetails->save();
             }

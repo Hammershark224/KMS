@@ -49,7 +49,7 @@ class bulletin extends Model
 
         if(!empty(Request::get('publishTo')))
         {
-            $return = $return->join('publish', 'publish.bulletin_bulletinId','=', 'bulletinId');
+            $return = $return->join('publish', 'publish.bulletinId','=', 'bulletinId');
 
             $return = $return->where('publish.publishTo', '=', Request::get('publishTo'));
         }
@@ -63,10 +63,9 @@ class bulletin extends Model
 
     static public function getRecordUser($publishTo)
     {
-        $return = bulletin::select('bulletin.*','users.full_name as createdBy_full_name')
-               ->join('users', 'users.user_ID', '=','bulletin.createdBy');
-        
-        $return = $return->join('publish', 'publish.bulletin_bulletinId','=', 'bulletinId');
+        $return = self::select('bulletin.*', 'users.full_name as createdBy_full_name')
+                      ->join('users', 'users.user_ID', '=', 'bulletin.createdBy')
+                      ->join('publish', 'publish.bulletinId', '=', 'bulletin.bulletinId');
 
         if(!empty(Request::get('bulletinTitle')))
         {
@@ -100,12 +99,14 @@ class bulletin extends Model
 
     public function getBulletinDetails()
     {
-        return $this->hasMany(publish::class,"bulletin_bulletinId");
+        return $this->hasMany(publish::class,"bulletinId");
     }
 
-    public function getBulletinDetailsToSingle($bulletin_bulletinId, $publishTo)
+    public function getBulletinDetailsToSingle($bulletinId, $publishTo)
     {
-        return publish::where('bulletin_bulletinId', '=', $bulletin_bulletinId)->where('publishTo', '=', $publishTo)->first();
+        return Publish::where('bulletinId', '=', $bulletinId)
+                      ->where('publishTo', '=', $publishTo)
+                      ->first();
     }
     
 
