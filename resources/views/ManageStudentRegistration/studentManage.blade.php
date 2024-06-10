@@ -64,19 +64,14 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $student->status }}</span>
                                         </td>
                                         <td class="align-middle text-center ">
-                                            <a href="{{ route('student.show', $student->student_ID) }}"
-                                                class="m-1 text-white text-secondary btn btn-info btn-sm"
-                                                data-toggle="tooltip" data-original-title="View">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="{{ route('student.edit', $student->student_ID) }}"
+                                            <a href="{{ route('student.edit', $student->full_name) }}"
                                                 class="m-1 text-white text-secondary btn btn-primary btn-sm"
                                                 data-toggle="tooltip" data-original-title="Edit">
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                             <a href="{{ route('student.delete', $student->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-danger btn-sm"
-                                                data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Confirm to delete?')">
+                                                data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Confirm to delete {{ $student->full_name }}?')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>
@@ -159,14 +154,14 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $child->status }}</span>
                                         </td>
                                         <td class="align-middle text-center ">
-                                            <a href="{{ route('student.show', $child->student_ID) }}"
+                                            <a href="{{ route('children.show', $child->full_name) }}"
                                                 class="m-1 text-white text-secondary btn btn-info btn-sm"
                                                 data-toggle="tooltip" data-original-title="View">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <a href="{{ route('student.delete', $child->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-danger btn-sm"
-                                                data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Confirm to delete?')">
+                                                data-toggle="tooltip" data-original-title="Delete" onclick="return confirm('Confirm to delete {{ $child->full_name }}?')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>

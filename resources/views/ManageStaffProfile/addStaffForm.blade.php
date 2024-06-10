@@ -51,6 +51,7 @@
                                     <input class="form-control" type="text" name="password">
                                 </div>
                             </div>
+                            <input class="form-control" type="hidden" name="role" value="staff">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Gender</label>
