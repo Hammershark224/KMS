@@ -60,7 +60,7 @@
                                 <p><strong>Created By:</strong> {{ $value->createdBy_full_name }}</p>
                             </div>
                             <div class="mailbox-read-message p-3">
-                                {!! $value->bulletinDetails !!}
+                            {!! nl2br(e($value->bulletinDetails)) !!}
                             </div>
                         </div>
                     </div>

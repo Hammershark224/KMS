@@ -23,18 +23,18 @@
                             {{csrf_field()}}
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>Title</label>
-                                    <input type="text" class="form-control" name="bulletinTitle" required placeholder="Title">
+                                    <label>Title<span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" name="bulletinTitle" required placeholder="Title"required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Publish Date</label>
-                                    <input type="date" class="form-control" name="publishDate" required placeholder="publish date">
+                                    <label>Publish Date<span style="color: red;">*</span></label>
+                                    <input type="date" class="form-control" name="publishDate" required placeholder="publish date"required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label style="display: block;">Publish To </label>
-                                    <label style="margin-right: 40px;"><input type="checkbox" value="4" name="publishTo[]"> Teacher</label>
+                                    <label style="display: block;">Publish To <span style="color: red;">*</span></label>
+                                    <label style="margin-right: 40px;"><input type="checkbox" value="4" name="publishTo[]"required> Teacher</label>
                                     <label><input type="checkbox" value="2" name="publishTo[]"> Parent</label>               
                                 </div>
 

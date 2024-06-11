@@ -61,7 +61,7 @@
                     <p><strong>Created By:</strong> {{$value->createdBy_name}}</p>
                   </div>
                   <div class="mailbox-read-message">
-                    {!! $value->bulletinDetails !!}
+                  {!! nl2br(e($value->bulletinDetails)) !!}
                   </div>
                 </div>
               </div>
