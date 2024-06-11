@@ -18,7 +18,21 @@
                     <div class="card-header pb-0" style="display: flex; justify-content: space-between; align-items: center;">
                         <p class="font-weight-bold">Student List</p>
                     </div>
-
+                    @if (session('error'))
+                    <div id="error-message" class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            setTimeout(function() {
+                                var errorMessage = document.getElementById('error-message');
+                                if (errorMessage) {
+                                    errorMessage.style.display = 'none';
+                                }
+                            }, 5000); // 5000 milliseconds = 5 seconds
+                        });
+                    </script>
+                    @endif
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -64,7 +78,7 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $student->status }}</span>
                                         </td>
                                         <td class="align-middle text-center ">
-                                            <a href="{{ route('student.edit', $student->full_name) }}"
+                                            <a href="{{ route('student.edit', $student->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-primary btn-sm"
                                                 data-toggle="tooltip" data-original-title="Edit">
                                                 <i class="fa fa-pen"></i>
@@ -154,7 +168,7 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $child->status }}</span>
                                         </td>
                                         <td class="align-middle text-center ">
-                                            <a href="{{ route('children.show', $child->full_name) }}"
+                                            <a href="{{ route('children.show', $child->student_ID) }}"
                                                 class="m-1 text-white text-secondary btn btn-info btn-sm"
                                                 data-toggle="tooltip" data-original-title="View">
                                                 <i class="fa fa-eye"></i>

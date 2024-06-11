@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class StudentApplicationController extends Controller
 {
     public function indexAdmin() {
+        //Get all students
         $students = StudentApplication::all();
         return view('ManageStudentRegistration.studentManage', compact('students'));
     }
@@ -21,6 +22,7 @@ class StudentApplicationController extends Controller
     }
 
     public function create() {
+        //Get parent detail
         $parents = ParentDetail::all();
         return view('ManageStudentRegistration.applyForm', compact('parents'));
     }
@@ -54,18 +56,20 @@ class StudentApplicationController extends Controller
         return redirect(route('children.manage'));
     }
 
-    public function show($full_name) {
-        $student = StudentApplication::where('full_name', $full_name)->firstOrFail();
+    public function show($id) {
+        //Retrieve selected student
+        $student = StudentApplication::find($id);
         // dd($student);
         return view('ManageStudentRegistration.viewForm', compact('student'));
     }
 
-    public function edit($full_name) {
-        $student = StudentApplication::where('full_name', $full_name)->firstOrFail();
+    public function edit($id) {
+        $student = StudentApplication::find($id);
         // dd($student);
         if($student->status == 'accepted') {
             return redirect(route('student.manage'))->with('error', 'accepted application cannot be edited');
         } else {
+            //Change status to reviewed once admin go to edit page
             $status = [
                 'status' => 'reviewed'
             ];
@@ -100,7 +104,7 @@ class StudentApplicationController extends Controller
         if ($role === 'k_admin') {
             return redirect(route('student.manage')); // Redirect to the admin view
         } elseif ($role === 'parent') {
-            return redirect(route('children.manage'));
+            return redirect(route('children.manage')); // Redirect to the parent view
         }
     }
 }
