@@ -96,9 +96,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/view-result-slip/{id}', [ResultController::class, 'slip'])->name('view-result-slip');
 	Route::get('/add-result', [ResultController::class, 'create'])->name('add-result');
 	Route::post('/add-result', [ResultController::class, 'store'])->name('add-result.perform');
-	Route::get('/edit-result/{result_id}', [ResultController::class, 'edit'])->name('edit-result');
-	Route::post('/edit-result/{result_id}', [ResultController::class, 'update'])->name('edit-result.perform');
-	Route::get('/delete-result/{result_id}', [ResultController::class, 'destroy'])->name('delete-result');
+	Route::get('/edit-result/{id}', [ResultController::class, 'edit'])->name('edit-result');
+	Route::post('/edit-result/{id}', [ResultController::class, 'update'])->name('edit-result.perform');
+	Route::get('/delete-result/{id}', [ResultController::class, 'destroy'])->name('delete-result');
 
 
 	// KAFA Bulletin   

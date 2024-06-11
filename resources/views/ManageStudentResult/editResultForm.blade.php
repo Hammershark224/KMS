@@ -11,7 +11,7 @@
                 <p class="font-weight-bold">Edit Student Result</p>
             </div>
             <div class="card-body">
-                <form action="{{ route('edit-result.perform', ['result_id' => $result->result_id]) }}" method="post">
+                <form action="{{ route('edit-result.perform', ['id' => $result->result_id]) }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-md-4">
