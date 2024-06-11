@@ -28,8 +28,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Publish Date</label>
-                                    <input type="date" class="form-control" name="publishDate" required placeholder="publish date">
+                                    <label>Publish Date<span style="color: red;">*</span></label>
+                                    <input type="date" class="form-control" name="publishDate" required placeholder="publish date"required>
                                 </div>
 
                                 <div class="form-group">
