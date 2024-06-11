@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class StaffProfileController extends Controller
 {
     public function index() {
+        //Get all staffs
         $staffs = StaffDetail::all();
         return view('ManageStaffProfile.staffManage', compact('staffs'));
     }
@@ -45,6 +46,7 @@ class StaffProfileController extends Controller
     }
 
     public function show($id) {
+        //Retrieve selected staff
         $staff = StaffDetail::find($id);
         // dd($staff);
         return view('ManageStaffProfile.viewStaffForm', compact('staff'));

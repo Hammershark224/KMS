@@ -60,8 +60,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/children-list', [StudentApplicationController::class, 'index'])->name('children.manage');
 	Route::get('/add-child', [StudentApplicationController::class, 'create'])->name('children.add');
 	Route::post('/store-child', [StudentApplicationController::class, 'store'])->name('children.store');
-	Route::get('/show-child/{full_name}', [StudentApplicationController::class, 'show'])->name('children.show');
-	Route::get('/edit-student/{full_name}', [StudentApplicationController::class, 'edit'])->name('student.edit');
+	Route::get('/show-child/{id}', [StudentApplicationController::class, 'show'])->name('children.show');
+	Route::get('/edit-student/{id}', [StudentApplicationController::class, 'edit'])->name('student.edit');
 	Route::post('/update-student/{id}', [StudentApplicationController::class, 'update'])->name('student.update');
 	Route::get('/delete-student/{id}', [StudentApplicationController::class, 'destroy'])->name('student.delete');
 
