@@ -104,7 +104,7 @@ class bulletin extends Model
 
     public function getBulletinDetailsToSingle($bulletinId, $publishTo)
     {
-        return Publish::where('bulletinId', '=', $bulletinId)
+        return publish::where('bulletinId', '=', $bulletinId)
                       ->where('publishTo', '=', $publishTo)
                       ->first();
     }

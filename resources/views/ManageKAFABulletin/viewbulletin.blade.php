@@ -30,8 +30,8 @@
                                 <input type="date" class="form-control" value="{{$getRecord->publishDate}}" readonly>
                             </div>
                             @php
-                                    $publishTo_teacher = $getRecord->getBulletinDetailsToSingle($getRecord->bulletinId, 2);
-                                    $publishTo_parent = $getRecord->getBulletinDetailsToSingle($getRecord->bulletinId, 3);
+                                    $publishTo_teacher = $getRecord->getBulletinDetailsToSingle($getRecord->bulletinId, 4);
+                                    $publishTo_parent = $getRecord->getBulletinDetailsToSingle($getRecord->bulletinId, 2);
                                     
                             @endphp
 
