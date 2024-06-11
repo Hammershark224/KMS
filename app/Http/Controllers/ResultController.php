@@ -45,7 +45,7 @@ class ResultController extends Controller
         $subjects = ResultReference::where('category', 'course')->get();
 
         // Return the view with the result, student, exam center, and subjects
-        return view('ManageStudentResult.resultForm', compact('result', 'tudent', 'examCenters', 'ubjects'));
+        return view('ManageStudentResult.resultForm', compact('result', 'student', 'examCenters', 'subjects'));
     }
 
     public function slip($id)
@@ -63,7 +63,7 @@ class ResultController extends Controller
         $subjects = ResultReference::where('category', 'course')->get();
 
         // Return the view to display the result slip
-        return view('ManageStudentResult.resultSlip', compact('result', 'tudent', 'examCenters', 'ubjects'));
+        return view('ManageStudentResult.resultSlip', compact('result', 'student', 'examCenters', 'subjects'));
     }
 
     public function create()
