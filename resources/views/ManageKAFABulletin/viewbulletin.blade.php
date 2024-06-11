@@ -39,10 +39,10 @@
                             <div class="form-group">
                                 <label style="display: block;">Publish To </label>
                                 <label style="margin-right: 40px;">
-                                    <input type="checkbox" value="2" {{ !empty($publishTo_teacher) ? 'checked' : '' }} disabled> Teacher
+                                    <input type="checkbox" value="4" {{ !empty($publishTo_teacher) ? 'checked' : '' }} disabled> Teacher
                                 </label>
                                 <label style="margin-right: 40px;">
-                                    <input type="checkbox" value="3" {{ !empty($publishTo_parent) ? 'checked' : '' }} disabled> Parent
+                                    <input type="checkbox" value="2" {{ !empty($publishTo_parent) ? 'checked' : '' }} disabled> Parent
                                 </label>               
                             </div>
 

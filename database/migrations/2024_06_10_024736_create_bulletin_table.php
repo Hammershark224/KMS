@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('bulletinId');
             $table->string('bulletinTitle');
             $table->date('publishDate');
-            $table->string('bulletinDetails',5000);
+            $table->text('bulletinDetails');
             $table->integer('createdBy');
             $table->datetime('createdAt');
             $table->datetime('updatedAt');

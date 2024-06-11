@@ -49,7 +49,7 @@
                         </form>
                     </div>
                 </div>
-
+               
                 @foreach($getRecord as $value)
                 <div class="col-md-12">
                     <div class="card card-primary card-outline">

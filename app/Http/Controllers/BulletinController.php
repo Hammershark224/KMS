@@ -93,7 +93,7 @@ class BulletinController extends Controller
 
     public function viewbulletin($bulletinId)
     {
-        $data['getRecord'] = Bulletin::getSingle($bulletinId);
+        $data['getRecord'] = bulletin::getSingle($bulletinId);
         $data['header_title'] = 'View Bulletin';
         return view('ManageKAFABulletin.viewbulletin', $data);
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('publish', function (Blueprint $table) {
             $table->id('publishId');
-            $table->foreignId('bulletinId')->references('bulletinId')->on('bulletin');
+            $table->foreignId('bulletinId')->constrained('bulletin','bulletinId')->onDelete('cascade');
             $table->integer('publishTo');
             $table->datetime('createdAt');
             $table->datetime('updatedAt');   
