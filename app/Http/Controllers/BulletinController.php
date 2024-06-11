@@ -103,7 +103,7 @@ class BulletinController extends Controller
     $teacherRole = 4; 
     $data['getRecord'] = bulletin::getRecordUser($teacherRole);
     $data['header_title'] = 'My Bulletin';
-    return view('ManageKAFABulletin.parentbulletin', $data);
+    return view('ManageKAFABulletin.teacherbulletin', $data);
     }
 
     public function mybulletinparent()

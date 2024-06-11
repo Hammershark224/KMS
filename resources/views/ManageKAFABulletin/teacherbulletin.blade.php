@@ -58,7 +58,7 @@
                   <div class="mailbox-read-info">
                     <h5>{{$value->bulletinTitle}}</h5>
                     <h6 style="margin-top:10px;">{{ date('d-m-Y', strtotime($value->publishDate))}}</h6>
-                    <p><strong>Created By:</strong> {{$value->createdBy_name}}</p>
+                    <p><strong>Created By:</strong> {{$value->createdBy_full_name}}</p>
                   </div>
                   <div class="mailbox-read-message">
                   {!! nl2br(e($value->bulletinDetails)) !!}
