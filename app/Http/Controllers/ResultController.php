@@ -135,7 +135,7 @@ class ResultController extends Controller
         return view('ManageStudentResult.editResultForm', compact('result', 'student', 'examCenters', 'courses'));
     }
 
-    public function update(Request $request, $result_id)
+    public function update(Request $request, $id)
     {
         // Validate the incoming request data
         $attributes = $request->validate([
@@ -152,7 +152,7 @@ class ResultController extends Controller
         ]);
 
         // Find the result with the specified ID
-        $result = Result::where('result_id', $result_id)->first();
+        $result = Result::where('result_id', $id)->first();
 
         // Update the result with the validated attributes
         $result->update($attributes);
@@ -161,10 +161,10 @@ class ResultController extends Controller
         return redirect()->route('results-list')->with('success', 'Result updated successfully.');
     }
 
-    public function destroy($result_id)
+    public function destroy($id)
     {
         // Find the result with the specified ID
-        $result = Result::where('result_id', $result_id)->first();
+        $result = Result::where('result_id', $id)->first();
 
         // Delete the result
         $result->delete();

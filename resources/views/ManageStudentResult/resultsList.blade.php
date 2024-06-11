@@ -91,7 +91,7 @@
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         @if (Auth::user()->role == 'k_admin' || Auth::user()->role == 'staff')
-                                                            <a href="{{ route('edit-result', ['result_id' => $result->result_id]) }}"
+                                                            <a href="{{ route('edit-result', ['id' => $result->result_id]) }}"
                                                                 class="m-1 text-white text-secondary btn btn-edit btn-sm"
                                                                 data-toggle="tooltip" data-original-title="Edit">
                                                                 <i class="fa fa-pen"></i>
