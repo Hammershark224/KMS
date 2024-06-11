@@ -10,7 +10,7 @@ use Auth;
 
 class BulletinController extends Controller
 {
-
+  // Display the bulletin for the user based on their role
   public function bulletin()
   {
         $role = Auth::user()->role;
@@ -18,13 +18,15 @@ class BulletinController extends Controller
         $data['header_title'] = 'Bulletin Board';
         return view('ManageKAFABulletin.listbulletin', $data);
   }
-  
+
+  // Show the form to create a new bulletin
     public function createbulletin()
     {
         $data['header_title'] = 'Add New Bulletin';
         return view('ManageKAFABulletin.createbulletin', $data);
     }
 
+    // Store a new bulletin in the database
     public function storebulletin(Request $request)
     {
         $save = new bulletin;
@@ -34,6 +36,7 @@ class BulletinController extends Controller
         $save->createdBy = Auth::user()->user_ID;
         $save->save();
 
+    // Save publication details if any
         if(!empty($request->publishTo))
         {
             foreach ($request->publishTo as $publishTo)
@@ -47,7 +50,7 @@ class BulletinController extends Controller
         return redirect('listbulletin')->with('success', "Bulletin successfully created");
     }
 
-
+    // display form to edit an existing bulletin
     public function editbulletin($bulletinId)
     {
         $data['getRecord'] = bulletin::getSingle($bulletinId);
@@ -55,7 +58,7 @@ class BulletinController extends Controller
         return view('ManageKAFABulletin.editbulletin', $data);
     }
 
-   
+   // Update an existing bulletin in the database
     public function  updatebulletin($bulletinId, Request $request)
     {
         $save = bulletin::getSingle($bulletinId);
@@ -64,8 +67,10 @@ class BulletinController extends Controller
         $save->bulletinDetails = $request->bulletinDetails;     
         $save->save();
 
+        // Delete existing publication details
         publish::where('bulletinId',$bulletinId)->delete();
-
+        
+         // Save updated publication details if any
         if(!empty($request->publishTo))
         {
             foreach ($request-> publishTo as $publishTo)
@@ -81,16 +86,20 @@ class BulletinController extends Controller
         return redirect('listbulletin')->with('success', "Bulletin successfully updated");
     }
 
+    // Delete a bulletin from the database
     public function deletebulletin($bulletinId)
     {
+        // Delete the bulletin
         $save = bulletin::getSingle($bulletinId);
         $save->delete();
 
+        // Delete associated publication details
         publish::DeleteRecord($bulletinId);
 
         return redirect()->back()->with('success', "Bulletin successfully deleted");
     }
-
+   
+    // View details of a specific bulletin
     public function viewbulletin($bulletinId)
     {
         $data['getRecord'] = bulletin::getSingle($bulletinId);
@@ -98,6 +107,7 @@ class BulletinController extends Controller
         return view('ManageKAFABulletin.viewbulletin', $data);
     }
 
+    // Display bulletins for teachers
     public function mybulletinteacher()
     {
     $teacherRole = 4; 
@@ -106,6 +116,7 @@ class BulletinController extends Controller
     return view('ManageKAFABulletin.teacherbulletin', $data);
     }
 
+    // Display bulletins for parents
     public function mybulletinparent()
     {
     $parentRole = 2; 
