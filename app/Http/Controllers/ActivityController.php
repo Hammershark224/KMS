@@ -66,6 +66,7 @@ class ActivityController extends Controller
         $activity = Activity::find($id);
         $activityDate = Carbon::parse($activity->activityDate);
         $currentDate = Carbon::now();
+        $isPast = $activityDate->isPast();
 
         // Check if the activity is today
         if ($activityDate->isToday()) {
@@ -73,7 +74,7 @@ class ActivityController extends Controller
         } else {
             $isToday = false;
         }
-        return view('ManageKAFAActivity.ViewActivity', compact('activity', 'isToday'));
+        return view('ManageKAFAActivity.ViewActivity', compact('activity', 'isToday', 'isPast'));
     }
 
     // Method to show the edit activity form

@@ -77,7 +77,7 @@ $role = Auth::user()->role;
             Participants</a>
           @endif
           @if ($role == "parent")
-          @if ($isToday)
+          @if ($isToday || $isPast)
           @else
           <a href="{{ route('join-activity',['id' => $activity->activityID]) }}" class="btn btn-submit m-1">Join</a>
           @endif
