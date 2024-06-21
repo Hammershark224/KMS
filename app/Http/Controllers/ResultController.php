@@ -82,7 +82,7 @@ class ResultController extends Controller
     {
         // Validate the incoming request data
         $attributes = $request->validate([
-            'stu_ic' => 'required',
+            'stu_ic' => 'required|digits_between:12,12',
             'exam_center_id' => 'required',
             'year' => 'required',
             'grade_solat' => 'required',
@@ -96,7 +96,8 @@ class ResultController extends Controller
         ], [
             // Custom error messages for validation
             'exam_center_id.required' => 'The exam center field is required.',
-            'year.required' => 'The year field is required.'
+            'year.required' => 'The year field is required.',
+            'digits_between' => 'The IC number must be 12 digits.'
         ]);
 
         // Find the student application associated with the provided IC number
@@ -105,6 +106,10 @@ class ResultController extends Controller
         // If the student is not found, return an error message
         if (!$student) {
             return back()->withInput()->withErrors(['stu_ic' => 'The IC number is not registered in our system.']);
+        }
+
+        if (Result::where('stu_ic', $request->stu_ic)->exists()) {
+            return back()->withInput()->withErrors(['stu_ic' => 'The result for this IC number has already been added.']);
         }
 
         // Add the student ID to the attributes array
